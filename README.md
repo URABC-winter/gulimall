@@ -1,1 +1,2 @@
-damn, password is token. why nobody tells me.
+setting all init, program decide use ruo-yi.
+决定采用若依。
