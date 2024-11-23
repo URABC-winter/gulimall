@@ -225,10 +225,13 @@
         <module>gulimall-admin</module>
         <module>gulimall-framework</module>
         <module>gulimall-system</module>
-        <module>gulimall-quartz</module>
         <module>gulimall-generator</module>
         <module>gulimall-common</module>
-        <module>gulimall-programe</module>
+        <module>gulimall-coupou</module>
+        <module>gulimall-member</module>
+        <module>gulimall-order</module>
+        <module>gulimall-product</module>
+        <module>gulimall-ware</module>
     </modules>
     <packaging>pom</packaging>
 
