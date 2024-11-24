@@ -35,6 +35,7 @@
         <logback.version>1.2.13</logback.version>
         <spring-security.version>5.7.12</spring-security.version>
         <spring-framework.version>5.3.39</spring-framework.version>
+        <cloud.version>3.1.5</cloud.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -216,6 +217,12 @@
                 <groupId>com.gulimall</groupId>
                 <artifactId>gulimall-common</artifactId>
                 <version>${gulimall.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-context</artifactId>
+                <version>${cloud.version}</version>
             </dependency>
 
         </dependencies>
