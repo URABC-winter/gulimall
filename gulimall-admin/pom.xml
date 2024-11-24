@@ -49,12 +49,6 @@
             <artifactId>gulimall-framework</artifactId>
         </dependency>
 
-        <!-- 定时任务-->
-        <dependency>
-            <groupId>com.gulimall</groupId>
-            <artifactId>gulimall-quartz</artifactId>
-        </dependency>
-
         <!-- 代码生成-->
         <dependency>
             <groupId>com.gulimall</groupId>

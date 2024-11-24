@@ -37,7 +37,7 @@ public class SmsCouponController extends BaseController
     /**
      * 查询优惠券信息列表
      */
-    @PreAuthorize("@ss.hasPermi('system:coupon:list')")
+//    @PreAuthorize("@ss.hasPermi('system:coupon:list')")
     @GetMapping("/list")
     public TableDataInfo list(SmsCoupon smsCoupon)
     {
