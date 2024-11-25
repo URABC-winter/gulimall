@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/address")
+@RequestMapping("/member/address")
 public class UmsMemberReceiveAddressController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class UmsMemberReceiveAddressController extends BaseController
     /**
      * 查询会员收货地址列表
      */
-    @PreAuthorize("@ss.hasPermi('system:address:list')")
     @GetMapping("/list")
     public TableDataInfo list(UmsMemberReceiveAddress umsMemberReceiveAddress)
     {
@@ -49,7 +48,6 @@ public class UmsMemberReceiveAddressController extends BaseController
     /**
      * 导出会员收货地址列表
      */
-    @PreAuthorize("@ss.hasPermi('system:address:export')")
     @Log(title = "会员收货地址", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, UmsMemberReceiveAddress umsMemberReceiveAddress)
@@ -62,7 +60,6 @@ public class UmsMemberReceiveAddressController extends BaseController
     /**
      * 获取会员收货地址详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:address:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class UmsMemberReceiveAddressController extends BaseController
     /**
      * 新增会员收货地址
      */
-    @PreAuthorize("@ss.hasPermi('system:address:add')")
     @Log(title = "会员收货地址", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody UmsMemberReceiveAddress umsMemberReceiveAddress)
@@ -83,7 +79,6 @@ public class UmsMemberReceiveAddressController extends BaseController
     /**
      * 修改会员收货地址
      */
-    @PreAuthorize("@ss.hasPermi('system:address:edit')")
     @Log(title = "会员收货地址", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody UmsMemberReceiveAddress umsMemberReceiveAddress)
@@ -94,7 +89,6 @@ public class UmsMemberReceiveAddressController extends BaseController
     /**
      * 删除会员收货地址
      */
-    @PreAuthorize("@ss.hasPermi('system:address:remove')")
     @Log(title = "会员收货地址", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

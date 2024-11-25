@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/price")
+@RequestMapping("/coupon/price")
 public class SmsMemberPriceController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class SmsMemberPriceController extends BaseController
     /**
      * 查询商品会员价格列表
      */
-    @PreAuthorize("@ss.hasPermi('system:price:list')")
     @GetMapping("/list")
     public TableDataInfo list(SmsMemberPrice smsMemberPrice)
     {
@@ -49,7 +48,6 @@ public class SmsMemberPriceController extends BaseController
     /**
      * 导出商品会员价格列表
      */
-    @PreAuthorize("@ss.hasPermi('system:price:export')")
     @Log(title = "商品会员价格", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SmsMemberPrice smsMemberPrice)
@@ -62,7 +60,6 @@ public class SmsMemberPriceController extends BaseController
     /**
      * 获取商品会员价格详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:price:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class SmsMemberPriceController extends BaseController
     /**
      * 新增商品会员价格
      */
-    @PreAuthorize("@ss.hasPermi('system:price:add')")
     @Log(title = "商品会员价格", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SmsMemberPrice smsMemberPrice)
@@ -83,7 +79,6 @@ public class SmsMemberPriceController extends BaseController
     /**
      * 修改商品会员价格
      */
-    @PreAuthorize("@ss.hasPermi('system:price:edit')")
     @Log(title = "商品会员价格", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SmsMemberPrice smsMemberPrice)
@@ -94,7 +89,6 @@ public class SmsMemberPriceController extends BaseController
     /**
      * 删除商品会员价格
      */
-    @PreAuthorize("@ss.hasPermi('system:price:remove')")
     @Log(title = "商品会员价格", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

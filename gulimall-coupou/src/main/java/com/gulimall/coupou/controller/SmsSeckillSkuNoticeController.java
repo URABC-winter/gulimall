@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/notice")
+@RequestMapping("/coupon/notice")
 public class SmsSeckillSkuNoticeController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class SmsSeckillSkuNoticeController extends BaseController
     /**
      * 查询秒杀商品通知订阅列表
      */
-    @PreAuthorize("@ss.hasPermi('system:notice:list')")
     @GetMapping("/list")
     public TableDataInfo list(SmsSeckillSkuNotice smsSeckillSkuNotice)
     {
@@ -49,7 +48,6 @@ public class SmsSeckillSkuNoticeController extends BaseController
     /**
      * 导出秒杀商品通知订阅列表
      */
-    @PreAuthorize("@ss.hasPermi('system:notice:export')")
     @Log(title = "秒杀商品通知订阅", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SmsSeckillSkuNotice smsSeckillSkuNotice)
@@ -62,7 +60,6 @@ public class SmsSeckillSkuNoticeController extends BaseController
     /**
      * 获取秒杀商品通知订阅详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:notice:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class SmsSeckillSkuNoticeController extends BaseController
     /**
      * 新增秒杀商品通知订阅
      */
-    @PreAuthorize("@ss.hasPermi('system:notice:add')")
     @Log(title = "秒杀商品通知订阅", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SmsSeckillSkuNotice smsSeckillSkuNotice)
@@ -83,7 +79,6 @@ public class SmsSeckillSkuNoticeController extends BaseController
     /**
      * 修改秒杀商品通知订阅
      */
-    @PreAuthorize("@ss.hasPermi('system:notice:edit')")
     @Log(title = "秒杀商品通知订阅", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SmsSeckillSkuNotice smsSeckillSkuNotice)
@@ -94,7 +89,6 @@ public class SmsSeckillSkuNoticeController extends BaseController
     /**
      * 删除秒杀商品通知订阅
      */
-    @PreAuthorize("@ss.hasPermi('system:notice:remove')")
     @Log(title = "秒杀商品通知订阅", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

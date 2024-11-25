@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/spu")
+@RequestMapping("/member/spu")
 public class UmsMemberCollectSpuController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class UmsMemberCollectSpuController extends BaseController
     /**
      * 查询会员收藏的商品列表
      */
-    @PreAuthorize("@ss.hasPermi('system:spu:list')")
     @GetMapping("/list")
     public TableDataInfo list(UmsMemberCollectSpu umsMemberCollectSpu)
     {
@@ -49,7 +48,6 @@ public class UmsMemberCollectSpuController extends BaseController
     /**
      * 导出会员收藏的商品列表
      */
-    @PreAuthorize("@ss.hasPermi('system:spu:export')")
     @Log(title = "会员收藏的商品", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, UmsMemberCollectSpu umsMemberCollectSpu)
@@ -62,7 +60,6 @@ public class UmsMemberCollectSpuController extends BaseController
     /**
      * 获取会员收藏的商品详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:spu:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class UmsMemberCollectSpuController extends BaseController
     /**
      * 新增会员收藏的商品
      */
-    @PreAuthorize("@ss.hasPermi('system:spu:add')")
     @Log(title = "会员收藏的商品", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody UmsMemberCollectSpu umsMemberCollectSpu)
@@ -83,7 +79,6 @@ public class UmsMemberCollectSpuController extends BaseController
     /**
      * 修改会员收藏的商品
      */
-    @PreAuthorize("@ss.hasPermi('system:spu:edit')")
     @Log(title = "会员收藏的商品", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody UmsMemberCollectSpu umsMemberCollectSpu)
@@ -94,7 +89,6 @@ public class UmsMemberCollectSpuController extends BaseController
     /**
      * 删除会员收藏的商品
      */
-    @PreAuthorize("@ss.hasPermi('system:spu:remove')")
     @Log(title = "会员收藏的商品", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

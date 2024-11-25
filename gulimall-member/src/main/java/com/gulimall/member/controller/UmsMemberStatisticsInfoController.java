@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/info")
+@RequestMapping("/member/info")
 public class UmsMemberStatisticsInfoController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class UmsMemberStatisticsInfoController extends BaseController
     /**
      * 查询会员统计信息列表
      */
-    @PreAuthorize("@ss.hasPermi('system:info:list')")
     @GetMapping("/list")
     public TableDataInfo list(UmsMemberStatisticsInfo umsMemberStatisticsInfo)
     {
@@ -49,7 +48,6 @@ public class UmsMemberStatisticsInfoController extends BaseController
     /**
      * 导出会员统计信息列表
      */
-    @PreAuthorize("@ss.hasPermi('system:info:export')")
     @Log(title = "会员统计信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, UmsMemberStatisticsInfo umsMemberStatisticsInfo)
@@ -62,7 +60,6 @@ public class UmsMemberStatisticsInfoController extends BaseController
     /**
      * 获取会员统计信息详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:info:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class UmsMemberStatisticsInfoController extends BaseController
     /**
      * 新增会员统计信息
      */
-    @PreAuthorize("@ss.hasPermi('system:info:add')")
     @Log(title = "会员统计信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody UmsMemberStatisticsInfo umsMemberStatisticsInfo)
@@ -83,7 +79,6 @@ public class UmsMemberStatisticsInfoController extends BaseController
     /**
      * 修改会员统计信息
      */
-    @PreAuthorize("@ss.hasPermi('system:info:edit')")
     @Log(title = "会员统计信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody UmsMemberStatisticsInfo umsMemberStatisticsInfo)
@@ -94,7 +89,6 @@ public class UmsMemberStatisticsInfoController extends BaseController
     /**
      * 删除会员统计信息
      */
-    @PreAuthorize("@ss.hasPermi('system:info:remove')")
     @Log(title = "会员统计信息", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

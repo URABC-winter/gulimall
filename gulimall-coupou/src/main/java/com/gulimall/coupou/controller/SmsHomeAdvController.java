@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/adv")
+@RequestMapping("/coupon/adv")
 public class SmsHomeAdvController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class SmsHomeAdvController extends BaseController
     /**
      * 查询首页轮播广告列表
      */
-    @PreAuthorize("@ss.hasPermi('system:adv:list')")
     @GetMapping("/list")
     public TableDataInfo list(SmsHomeAdv smsHomeAdv)
     {
@@ -49,7 +48,6 @@ public class SmsHomeAdvController extends BaseController
     /**
      * 导出首页轮播广告列表
      */
-    @PreAuthorize("@ss.hasPermi('system:adv:export')")
     @Log(title = "首页轮播广告", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SmsHomeAdv smsHomeAdv)
@@ -62,7 +60,6 @@ public class SmsHomeAdvController extends BaseController
     /**
      * 获取首页轮播广告详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:adv:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class SmsHomeAdvController extends BaseController
     /**
      * 新增首页轮播广告
      */
-    @PreAuthorize("@ss.hasPermi('system:adv:add')")
     @Log(title = "首页轮播广告", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SmsHomeAdv smsHomeAdv)
@@ -83,7 +79,6 @@ public class SmsHomeAdvController extends BaseController
     /**
      * 修改首页轮播广告
      */
-    @PreAuthorize("@ss.hasPermi('system:adv:edit')")
     @Log(title = "首页轮播广告", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SmsHomeAdv smsHomeAdv)
@@ -94,7 +89,6 @@ public class SmsHomeAdvController extends BaseController
     /**
      * 删除首页轮播广告
      */
-    @PreAuthorize("@ss.hasPermi('system:adv:remove')")
     @Log(title = "首页轮播广告", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

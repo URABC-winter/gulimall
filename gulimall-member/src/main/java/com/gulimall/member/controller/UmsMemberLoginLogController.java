@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/log")
+@RequestMapping("/member/log")
 public class UmsMemberLoginLogController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class UmsMemberLoginLogController extends BaseController
     /**
      * 查询会员登录记录列表
      */
-    @PreAuthorize("@ss.hasPermi('system:log:list')")
     @GetMapping("/list")
     public TableDataInfo list(UmsMemberLoginLog umsMemberLoginLog)
     {
@@ -49,7 +48,6 @@ public class UmsMemberLoginLogController extends BaseController
     /**
      * 导出会员登录记录列表
      */
-    @PreAuthorize("@ss.hasPermi('system:log:export')")
     @Log(title = "会员登录记录", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, UmsMemberLoginLog umsMemberLoginLog)
@@ -62,7 +60,6 @@ public class UmsMemberLoginLogController extends BaseController
     /**
      * 获取会员登录记录详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:log:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class UmsMemberLoginLogController extends BaseController
     /**
      * 新增会员登录记录
      */
-    @PreAuthorize("@ss.hasPermi('system:log:add')")
     @Log(title = "会员登录记录", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody UmsMemberLoginLog umsMemberLoginLog)
@@ -83,7 +79,6 @@ public class UmsMemberLoginLogController extends BaseController
     /**
      * 修改会员登录记录
      */
-    @PreAuthorize("@ss.hasPermi('system:log:edit')")
     @Log(title = "会员登录记录", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody UmsMemberLoginLog umsMemberLoginLog)
@@ -94,7 +89,6 @@ public class UmsMemberLoginLogController extends BaseController
     /**
      * 删除会员登录记录
      */
-    @PreAuthorize("@ss.hasPermi('system:log:remove')")
     @Log(title = "会员登录记录", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

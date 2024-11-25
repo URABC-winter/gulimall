@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/ladder")
+@RequestMapping("/coupon/ladder")
 public class SmsSkuLadderController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class SmsSkuLadderController extends BaseController
     /**
      * 查询商品阶梯价格列表
      */
-    @PreAuthorize("@ss.hasPermi('system:ladder:list')")
     @GetMapping("/list")
     public TableDataInfo list(SmsSkuLadder smsSkuLadder)
     {
@@ -49,7 +48,6 @@ public class SmsSkuLadderController extends BaseController
     /**
      * 导出商品阶梯价格列表
      */
-    @PreAuthorize("@ss.hasPermi('system:ladder:export')")
     @Log(title = "商品阶梯价格", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SmsSkuLadder smsSkuLadder)
@@ -62,7 +60,6 @@ public class SmsSkuLadderController extends BaseController
     /**
      * 获取商品阶梯价格详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:ladder:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class SmsSkuLadderController extends BaseController
     /**
      * 新增商品阶梯价格
      */
-    @PreAuthorize("@ss.hasPermi('system:ladder:add')")
     @Log(title = "商品阶梯价格", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SmsSkuLadder smsSkuLadder)
@@ -83,7 +79,6 @@ public class SmsSkuLadderController extends BaseController
     /**
      * 修改商品阶梯价格
      */
-    @PreAuthorize("@ss.hasPermi('system:ladder:edit')")
     @Log(title = "商品阶梯价格", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SmsSkuLadder smsSkuLadder)
@@ -94,7 +89,6 @@ public class SmsSkuLadderController extends BaseController
     /**
      * 删除商品阶梯价格
      */
-    @PreAuthorize("@ss.hasPermi('system:ladder:remove')")
     @Log(title = "商品阶梯价格", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

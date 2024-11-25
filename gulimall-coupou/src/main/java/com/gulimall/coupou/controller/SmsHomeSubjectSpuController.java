@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/spu")
+@RequestMapping("/coupon/spu")
 public class SmsHomeSubjectSpuController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class SmsHomeSubjectSpuController extends BaseController
     /**
      * 查询专题商品列表
      */
-    @PreAuthorize("@ss.hasPermi('system:spu:list')")
     @GetMapping("/list")
     public TableDataInfo list(SmsHomeSubjectSpu smsHomeSubjectSpu)
     {
@@ -49,7 +48,6 @@ public class SmsHomeSubjectSpuController extends BaseController
     /**
      * 导出专题商品列表
      */
-    @PreAuthorize("@ss.hasPermi('system:spu:export')")
     @Log(title = "专题商品", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SmsHomeSubjectSpu smsHomeSubjectSpu)
@@ -62,7 +60,6 @@ public class SmsHomeSubjectSpuController extends BaseController
     /**
      * 获取专题商品详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:spu:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class SmsHomeSubjectSpuController extends BaseController
     /**
      * 新增专题商品
      */
-    @PreAuthorize("@ss.hasPermi('system:spu:add')")
     @Log(title = "专题商品", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SmsHomeSubjectSpu smsHomeSubjectSpu)
@@ -83,7 +79,6 @@ public class SmsHomeSubjectSpuController extends BaseController
     /**
      * 修改专题商品
      */
-    @PreAuthorize("@ss.hasPermi('system:spu:edit')")
     @Log(title = "专题商品", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SmsHomeSubjectSpu smsHomeSubjectSpu)
@@ -94,7 +89,6 @@ public class SmsHomeSubjectSpuController extends BaseController
     /**
      * 删除专题商品
      */
-    @PreAuthorize("@ss.hasPermi('system:spu:remove')")
     @Log(title = "专题商品", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

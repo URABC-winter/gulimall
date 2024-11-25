@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/history")
+@RequestMapping("/coupon/history")
 public class SmsCouponHistoryController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class SmsCouponHistoryController extends BaseController
     /**
      * 查询优惠券领取历史记录列表
      */
-    @PreAuthorize("@ss.hasPermi('system:history:list')")
     @GetMapping("/list")
     public TableDataInfo list(SmsCouponHistory smsCouponHistory)
     {
@@ -49,7 +48,6 @@ public class SmsCouponHistoryController extends BaseController
     /**
      * 导出优惠券领取历史记录列表
      */
-    @PreAuthorize("@ss.hasPermi('system:history:export')")
     @Log(title = "优惠券领取历史记录", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SmsCouponHistory smsCouponHistory)
@@ -62,7 +60,6 @@ public class SmsCouponHistoryController extends BaseController
     /**
      * 获取优惠券领取历史记录详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:history:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class SmsCouponHistoryController extends BaseController
     /**
      * 新增优惠券领取历史记录
      */
-    @PreAuthorize("@ss.hasPermi('system:history:add')")
     @Log(title = "优惠券领取历史记录", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SmsCouponHistory smsCouponHistory)
@@ -83,7 +79,6 @@ public class SmsCouponHistoryController extends BaseController
     /**
      * 修改优惠券领取历史记录
      */
-    @PreAuthorize("@ss.hasPermi('system:history:edit')")
     @Log(title = "优惠券领取历史记录", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SmsCouponHistory smsCouponHistory)
@@ -94,7 +89,6 @@ public class SmsCouponHistoryController extends BaseController
     /**
      * 删除优惠券领取历史记录
      */
-    @PreAuthorize("@ss.hasPermi('system:history:remove')")
     @Log(title = "优惠券领取历史记录", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

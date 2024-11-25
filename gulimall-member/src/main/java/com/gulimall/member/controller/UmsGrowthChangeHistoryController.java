@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/history")
+@RequestMapping("/member/growhistory")
 public class UmsGrowthChangeHistoryController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class UmsGrowthChangeHistoryController extends BaseController
     /**
      * 查询成长值变化历史记录列表
      */
-    @PreAuthorize("@ss.hasPermi('system:history:list')")
     @GetMapping("/list")
     public TableDataInfo list(UmsGrowthChangeHistory umsGrowthChangeHistory)
     {
@@ -49,7 +48,6 @@ public class UmsGrowthChangeHistoryController extends BaseController
     /**
      * 导出成长值变化历史记录列表
      */
-    @PreAuthorize("@ss.hasPermi('system:history:export')")
     @Log(title = "成长值变化历史记录", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, UmsGrowthChangeHistory umsGrowthChangeHistory)
@@ -62,7 +60,6 @@ public class UmsGrowthChangeHistoryController extends BaseController
     /**
      * 获取成长值变化历史记录详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:history:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class UmsGrowthChangeHistoryController extends BaseController
     /**
      * 新增成长值变化历史记录
      */
-    @PreAuthorize("@ss.hasPermi('system:history:add')")
     @Log(title = "成长值变化历史记录", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody UmsGrowthChangeHistory umsGrowthChangeHistory)
@@ -83,7 +79,6 @@ public class UmsGrowthChangeHistoryController extends BaseController
     /**
      * 修改成长值变化历史记录
      */
-    @PreAuthorize("@ss.hasPermi('system:history:edit')")
     @Log(title = "成长值变化历史记录", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody UmsGrowthChangeHistory umsGrowthChangeHistory)
@@ -94,7 +89,6 @@ public class UmsGrowthChangeHistoryController extends BaseController
     /**
      * 删除成长值变化历史记录
      */
-    @PreAuthorize("@ss.hasPermi('system:history:remove')")
     @Log(title = "成长值变化历史记录", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

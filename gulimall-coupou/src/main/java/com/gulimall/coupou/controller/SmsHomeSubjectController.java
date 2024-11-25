@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/subject")
+@RequestMapping("/coupon/subject")
 public class SmsHomeSubjectController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class SmsHomeSubjectController extends BaseController
     /**
      * 查询首页专题【jd首页下面很多专题，每个专题链接新的页面，展示专题商品信息】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:subject:list')")
     @GetMapping("/list")
     public TableDataInfo list(SmsHomeSubject smsHomeSubject)
     {
@@ -49,7 +48,6 @@ public class SmsHomeSubjectController extends BaseController
     /**
      * 导出首页专题【jd首页下面很多专题，每个专题链接新的页面，展示专题商品信息】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:subject:export')")
     @Log(title = "首页专题【jd首页下面很多专题，每个专题链接新的页面，展示专题商品信息】", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SmsHomeSubject smsHomeSubject)
@@ -62,7 +60,6 @@ public class SmsHomeSubjectController extends BaseController
     /**
      * 获取首页专题【jd首页下面很多专题，每个专题链接新的页面，展示专题商品信息】详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:subject:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class SmsHomeSubjectController extends BaseController
     /**
      * 新增首页专题【jd首页下面很多专题，每个专题链接新的页面，展示专题商品信息】
      */
-    @PreAuthorize("@ss.hasPermi('system:subject:add')")
     @Log(title = "首页专题【jd首页下面很多专题，每个专题链接新的页面，展示专题商品信息】", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SmsHomeSubject smsHomeSubject)
@@ -83,7 +79,6 @@ public class SmsHomeSubjectController extends BaseController
     /**
      * 修改首页专题【jd首页下面很多专题，每个专题链接新的页面，展示专题商品信息】
      */
-    @PreAuthorize("@ss.hasPermi('system:subject:edit')")
     @Log(title = "首页专题【jd首页下面很多专题，每个专题链接新的页面，展示专题商品信息】", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SmsHomeSubject smsHomeSubject)
@@ -94,7 +89,6 @@ public class SmsHomeSubjectController extends BaseController
     /**
      * 删除首页专题【jd首页下面很多专题，每个专题链接新的页面，展示专题商品信息】
      */
-    @PreAuthorize("@ss.hasPermi('system:subject:remove')")
     @Log(title = "首页专题【jd首页下面很多专题，每个专题链接新的页面，展示专题商品信息】", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

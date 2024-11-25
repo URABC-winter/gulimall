@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/history")
+@RequestMapping("/member/intehistory")
 public class UmsIntegrationChangeHistoryController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class UmsIntegrationChangeHistoryController extends BaseController
     /**
      * 查询积分变化历史记录列表
      */
-    @PreAuthorize("@ss.hasPermi('system:history:list')")
     @GetMapping("/list")
     public TableDataInfo list(UmsIntegrationChangeHistory umsIntegrationChangeHistory)
     {
@@ -49,7 +48,6 @@ public class UmsIntegrationChangeHistoryController extends BaseController
     /**
      * 导出积分变化历史记录列表
      */
-    @PreAuthorize("@ss.hasPermi('system:history:export')")
     @Log(title = "积分变化历史记录", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, UmsIntegrationChangeHistory umsIntegrationChangeHistory)
@@ -62,7 +60,6 @@ public class UmsIntegrationChangeHistoryController extends BaseController
     /**
      * 获取积分变化历史记录详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:history:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class UmsIntegrationChangeHistoryController extends BaseController
     /**
      * 新增积分变化历史记录
      */
-    @PreAuthorize("@ss.hasPermi('system:history:add')")
     @Log(title = "积分变化历史记录", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody UmsIntegrationChangeHistory umsIntegrationChangeHistory)
@@ -83,7 +79,6 @@ public class UmsIntegrationChangeHistoryController extends BaseController
     /**
      * 修改积分变化历史记录
      */
-    @PreAuthorize("@ss.hasPermi('system:history:edit')")
     @Log(title = "积分变化历史记录", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody UmsIntegrationChangeHistory umsIntegrationChangeHistory)
@@ -94,7 +89,6 @@ public class UmsIntegrationChangeHistoryController extends BaseController
     /**
      * 删除积分变化历史记录
      */
-    @PreAuthorize("@ss.hasPermi('system:history:remove')")
     @Log(title = "积分变化历史记录", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

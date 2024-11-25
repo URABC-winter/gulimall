@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/relation")
+@RequestMapping("/coupon/relation")
 public class SmsCouponSpuRelationController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class SmsCouponSpuRelationController extends BaseController
     /**
      * 查询优惠券与产品关联列表
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:list')")
     @GetMapping("/list")
     public TableDataInfo list(SmsCouponSpuRelation smsCouponSpuRelation)
     {
@@ -49,7 +48,6 @@ public class SmsCouponSpuRelationController extends BaseController
     /**
      * 导出优惠券与产品关联列表
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:export')")
     @Log(title = "优惠券与产品关联", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SmsCouponSpuRelation smsCouponSpuRelation)
@@ -62,7 +60,6 @@ public class SmsCouponSpuRelationController extends BaseController
     /**
      * 获取优惠券与产品关联详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class SmsCouponSpuRelationController extends BaseController
     /**
      * 新增优惠券与产品关联
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:add')")
     @Log(title = "优惠券与产品关联", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SmsCouponSpuRelation smsCouponSpuRelation)
@@ -83,7 +79,6 @@ public class SmsCouponSpuRelationController extends BaseController
     /**
      * 修改优惠券与产品关联
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:edit')")
     @Log(title = "优惠券与产品关联", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SmsCouponSpuRelation smsCouponSpuRelation)
@@ -94,7 +89,6 @@ public class SmsCouponSpuRelationController extends BaseController
     /**
      * 删除优惠券与产品关联
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:remove')")
     @Log(title = "优惠券与产品关联", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

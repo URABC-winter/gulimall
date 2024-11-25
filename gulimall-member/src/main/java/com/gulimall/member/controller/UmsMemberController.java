@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/member")
+@RequestMapping("/member")
 public class UmsMemberController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class UmsMemberController extends BaseController
     /**
      * 查询会员列表
      */
-    @PreAuthorize("@ss.hasPermi('system:member:list')")
     @GetMapping("/list")
     public TableDataInfo list(UmsMember umsMember)
     {
@@ -49,7 +48,6 @@ public class UmsMemberController extends BaseController
     /**
      * 导出会员列表
      */
-    @PreAuthorize("@ss.hasPermi('system:member:export')")
     @Log(title = "会员", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, UmsMember umsMember)
@@ -62,7 +60,6 @@ public class UmsMemberController extends BaseController
     /**
      * 获取会员详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:member:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class UmsMemberController extends BaseController
     /**
      * 新增会员
      */
-    @PreAuthorize("@ss.hasPermi('system:member:add')")
     @Log(title = "会员", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody UmsMember umsMember)
@@ -83,7 +79,6 @@ public class UmsMemberController extends BaseController
     /**
      * 修改会员
      */
-    @PreAuthorize("@ss.hasPermi('system:member:edit')")
     @Log(title = "会员", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody UmsMember umsMember)
@@ -94,7 +89,6 @@ public class UmsMemberController extends BaseController
     /**
      * 删除会员
      */
-    @PreAuthorize("@ss.hasPermi('system:member:remove')")
     @Log(title = "会员", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

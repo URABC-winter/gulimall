@@ -2,6 +2,8 @@ package com.gulimall.coupou.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,16 +30,27 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/coupon")
+@RequestMapping("/coupon")
 public class SmsCouponController extends BaseController
 {
     @Autowired
     private ISmsCouponService smsCouponService;
 
+    @Value("${user.name}")
+    private String name;
+
+    @Value("$user.age")
+    private String age;
+
+    @GetMapping("/test")
+    public String print(){
+        String str = "name:"+name+" age:"+age;
+        return str;
+    }
+
     /**
      * 查询优惠券信息列表
      */
-//    @PreAuthorize("@ss.hasPermi('system:coupon:list')")
     @GetMapping("/list")
     public TableDataInfo list(SmsCoupon smsCoupon)
     {
@@ -49,7 +62,6 @@ public class SmsCouponController extends BaseController
     /**
      * 导出优惠券信息列表
      */
-    @PreAuthorize("@ss.hasPermi('system:coupon:export')")
     @Log(title = "优惠券信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SmsCoupon smsCoupon)
@@ -62,7 +74,6 @@ public class SmsCouponController extends BaseController
     /**
      * 获取优惠券信息详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:coupon:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +83,6 @@ public class SmsCouponController extends BaseController
     /**
      * 新增优惠券信息
      */
-    @PreAuthorize("@ss.hasPermi('system:coupon:add')")
     @Log(title = "优惠券信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SmsCoupon smsCoupon)
@@ -83,7 +93,6 @@ public class SmsCouponController extends BaseController
     /**
      * 修改优惠券信息
      */
-    @PreAuthorize("@ss.hasPermi('system:coupon:edit')")
     @Log(title = "优惠券信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SmsCoupon smsCoupon)
@@ -94,7 +103,6 @@ public class SmsCouponController extends BaseController
     /**
      * 删除优惠券信息
      */
-    @PreAuthorize("@ss.hasPermi('system:coupon:remove')")
     @Log(title = "优惠券信息", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

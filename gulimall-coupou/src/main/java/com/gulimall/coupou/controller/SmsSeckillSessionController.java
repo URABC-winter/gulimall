@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/session")
+@RequestMapping("/coupon/session")
 public class SmsSeckillSessionController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class SmsSeckillSessionController extends BaseController
     /**
      * 查询秒杀活动场次列表
      */
-    @PreAuthorize("@ss.hasPermi('system:session:list')")
     @GetMapping("/list")
     public TableDataInfo list(SmsSeckillSession smsSeckillSession)
     {
@@ -49,7 +48,6 @@ public class SmsSeckillSessionController extends BaseController
     /**
      * 导出秒杀活动场次列表
      */
-    @PreAuthorize("@ss.hasPermi('system:session:export')")
     @Log(title = "秒杀活动场次", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SmsSeckillSession smsSeckillSession)
@@ -62,7 +60,6 @@ public class SmsSeckillSessionController extends BaseController
     /**
      * 获取秒杀活动场次详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:session:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class SmsSeckillSessionController extends BaseController
     /**
      * 新增秒杀活动场次
      */
-    @PreAuthorize("@ss.hasPermi('system:session:add')")
     @Log(title = "秒杀活动场次", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SmsSeckillSession smsSeckillSession)
@@ -83,7 +79,6 @@ public class SmsSeckillSessionController extends BaseController
     /**
      * 修改秒杀活动场次
      */
-    @PreAuthorize("@ss.hasPermi('system:session:edit')")
     @Log(title = "秒杀活动场次", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SmsSeckillSession smsSeckillSession)
@@ -94,7 +89,6 @@ public class SmsSeckillSessionController extends BaseController
     /**
      * 删除秒杀活动场次
      */
-    @PreAuthorize("@ss.hasPermi('system:session:remove')")
     @Log(title = "秒杀活动场次", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

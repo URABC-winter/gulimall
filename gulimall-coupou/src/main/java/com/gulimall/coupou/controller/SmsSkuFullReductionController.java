@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/reduction")
+@RequestMapping("/coupon/reduction")
 public class SmsSkuFullReductionController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class SmsSkuFullReductionController extends BaseController
     /**
      * 查询商品满减信息列表
      */
-    @PreAuthorize("@ss.hasPermi('system:reduction:list')")
     @GetMapping("/list")
     public TableDataInfo list(SmsSkuFullReduction smsSkuFullReduction)
     {
@@ -49,7 +48,6 @@ public class SmsSkuFullReductionController extends BaseController
     /**
      * 导出商品满减信息列表
      */
-    @PreAuthorize("@ss.hasPermi('system:reduction:export')")
     @Log(title = "商品满减信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SmsSkuFullReduction smsSkuFullReduction)
@@ -62,7 +60,6 @@ public class SmsSkuFullReductionController extends BaseController
     /**
      * 获取商品满减信息详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:reduction:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class SmsSkuFullReductionController extends BaseController
     /**
      * 新增商品满减信息
      */
-    @PreAuthorize("@ss.hasPermi('system:reduction:add')")
     @Log(title = "商品满减信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SmsSkuFullReduction smsSkuFullReduction)
@@ -83,7 +79,6 @@ public class SmsSkuFullReductionController extends BaseController
     /**
      * 修改商品满减信息
      */
-    @PreAuthorize("@ss.hasPermi('system:reduction:edit')")
     @Log(title = "商品满减信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SmsSkuFullReduction smsSkuFullReduction)
@@ -94,7 +89,6 @@ public class SmsSkuFullReductionController extends BaseController
     /**
      * 删除商品满减信息
      */
-    @PreAuthorize("@ss.hasPermi('system:reduction:remove')")
     @Log(title = "商品满减信息", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

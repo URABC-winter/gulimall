@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/skurelation")
+@RequestMapping("/coupon/skurelation")
 public class SmsSeckillSkuRelationController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class SmsSeckillSkuRelationController extends BaseController
     /**
      * 查询秒杀活动商品关联列表
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:list')")
     @GetMapping("/list")
     public TableDataInfo list(SmsSeckillSkuRelation smsSeckillSkuRelation)
     {
@@ -49,7 +48,6 @@ public class SmsSeckillSkuRelationController extends BaseController
     /**
      * 导出秒杀活动商品关联列表
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:export')")
     @Log(title = "秒杀活动商品关联", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SmsSeckillSkuRelation smsSeckillSkuRelation)
@@ -62,7 +60,6 @@ public class SmsSeckillSkuRelationController extends BaseController
     /**
      * 获取秒杀活动商品关联详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class SmsSeckillSkuRelationController extends BaseController
     /**
      * 新增秒杀活动商品关联
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:add')")
     @Log(title = "秒杀活动商品关联", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SmsSeckillSkuRelation smsSeckillSkuRelation)
@@ -83,7 +79,6 @@ public class SmsSeckillSkuRelationController extends BaseController
     /**
      * 修改秒杀活动商品关联
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:edit')")
     @Log(title = "秒杀活动商品关联", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SmsSeckillSkuRelation smsSeckillSkuRelation)
@@ -94,7 +89,6 @@ public class SmsSeckillSkuRelationController extends BaseController
     /**
      * 删除秒杀活动商品关联
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:remove')")
     @Log(title = "秒杀活动商品关联", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
