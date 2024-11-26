@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,16 +31,17 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
+@RefreshScope
 @RequestMapping("/coupon")
 public class SmsCouponController extends BaseController
 {
     @Autowired
     private ISmsCouponService smsCouponService;
 
-    @Value("${user.name}")
+    @Value("${config.name}")
     private String name;
 
-    @Value("$user.age")
+    @Value("${config.age}")
     private String age;
 
     @GetMapping("/test")

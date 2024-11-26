@@ -16,14 +16,10 @@ spring:
       username: 'nacos'
       password: 'nacos'
       discovery:
-        namespace: gulimall-coupon
-      config:
-        server-addr: localhost:8848
-        name: gulimall-coupon
-        file-extension: yaml
-        group: DEFAULT_GROUP
-
-
+        server-addr: 127.0.0.1:8848
+  config:
+    import:
+      - nacos:gulimall-coupon.yaml?refreshEnabled=true&group=DEFAULT_GROUP
 
 mybatis:
   # 搜索指定包别名
