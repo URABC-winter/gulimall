@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/images")
+@RequestMapping("/product/skuImages")
 public class PmsSkuImagesController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class PmsSkuImagesController extends BaseController
     /**
      * 查询sku图片列表
      */
-    @PreAuthorize("@ss.hasPermi('system:images:list')")
     @GetMapping("/list")
     public TableDataInfo list(PmsSkuImages pmsSkuImages)
     {
@@ -49,7 +48,6 @@ public class PmsSkuImagesController extends BaseController
     /**
      * 导出sku图片列表
      */
-    @PreAuthorize("@ss.hasPermi('system:images:export')")
     @Log(title = "sku图片", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, PmsSkuImages pmsSkuImages)
@@ -62,7 +60,6 @@ public class PmsSkuImagesController extends BaseController
     /**
      * 获取sku图片详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:images:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class PmsSkuImagesController extends BaseController
     /**
      * 新增sku图片
      */
-    @PreAuthorize("@ss.hasPermi('system:images:add')")
     @Log(title = "sku图片", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PmsSkuImages pmsSkuImages)
@@ -83,7 +79,6 @@ public class PmsSkuImagesController extends BaseController
     /**
      * 修改sku图片
      */
-    @PreAuthorize("@ss.hasPermi('system:images:edit')")
     @Log(title = "sku图片", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PmsSkuImages pmsSkuImages)
@@ -94,7 +89,6 @@ public class PmsSkuImagesController extends BaseController
     /**
      * 删除sku图片
      */
-    @PreAuthorize("@ss.hasPermi('system:images:remove')")
     @Log(title = "sku图片", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

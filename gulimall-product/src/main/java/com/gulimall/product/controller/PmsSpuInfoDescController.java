@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/desc")
+@RequestMapping("/product/desc")
 public class PmsSpuInfoDescController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class PmsSpuInfoDescController extends BaseController
     /**
      * 查询spu信息介绍列表
      */
-    @PreAuthorize("@ss.hasPermi('system:desc:list')")
     @GetMapping("/list")
     public TableDataInfo list(PmsSpuInfoDesc pmsSpuInfoDesc)
     {
@@ -49,7 +48,6 @@ public class PmsSpuInfoDescController extends BaseController
     /**
      * 导出spu信息介绍列表
      */
-    @PreAuthorize("@ss.hasPermi('system:desc:export')")
     @Log(title = "spu信息介绍", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, PmsSpuInfoDesc pmsSpuInfoDesc)
@@ -62,7 +60,6 @@ public class PmsSpuInfoDescController extends BaseController
     /**
      * 获取spu信息介绍详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:desc:query')")
     @GetMapping(value = "/{spuId}")
     public AjaxResult getInfo(@PathVariable("spuId") Long spuId)
     {
@@ -72,7 +69,6 @@ public class PmsSpuInfoDescController extends BaseController
     /**
      * 新增spu信息介绍
      */
-    @PreAuthorize("@ss.hasPermi('system:desc:add')")
     @Log(title = "spu信息介绍", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PmsSpuInfoDesc pmsSpuInfoDesc)
@@ -83,7 +79,6 @@ public class PmsSpuInfoDescController extends BaseController
     /**
      * 修改spu信息介绍
      */
-    @PreAuthorize("@ss.hasPermi('system:desc:edit')")
     @Log(title = "spu信息介绍", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PmsSpuInfoDesc pmsSpuInfoDesc)
@@ -94,7 +89,6 @@ public class PmsSpuInfoDescController extends BaseController
     /**
      * 删除spu信息介绍
      */
-    @PreAuthorize("@ss.hasPermi('system:desc:remove')")
     @Log(title = "spu信息介绍", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{spuIds}")
     public AjaxResult remove(@PathVariable Long[] spuIds)

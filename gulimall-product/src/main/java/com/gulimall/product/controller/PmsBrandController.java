@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/brand")
+@RequestMapping("/product/brand")
 public class PmsBrandController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class PmsBrandController extends BaseController
     /**
      * 查询品牌列表
      */
-    @PreAuthorize("@ss.hasPermi('system:brand:list')")
     @GetMapping("/list")
     public TableDataInfo list(PmsBrand pmsBrand)
     {
@@ -49,7 +48,6 @@ public class PmsBrandController extends BaseController
     /**
      * 导出品牌列表
      */
-    @PreAuthorize("@ss.hasPermi('system:brand:export')")
     @Log(title = "品牌", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, PmsBrand pmsBrand)
@@ -62,7 +60,6 @@ public class PmsBrandController extends BaseController
     /**
      * 获取品牌详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:brand:query')")
     @GetMapping(value = "/{brandId}")
     public AjaxResult getInfo(@PathVariable("brandId") Long brandId)
     {
@@ -72,7 +69,6 @@ public class PmsBrandController extends BaseController
     /**
      * 新增品牌
      */
-    @PreAuthorize("@ss.hasPermi('system:brand:add')")
     @Log(title = "品牌", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PmsBrand pmsBrand)
@@ -83,7 +79,6 @@ public class PmsBrandController extends BaseController
     /**
      * 修改品牌
      */
-    @PreAuthorize("@ss.hasPermi('system:brand:edit')")
     @Log(title = "品牌", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PmsBrand pmsBrand)
@@ -94,7 +89,6 @@ public class PmsBrandController extends BaseController
     /**
      * 删除品牌
      */
-    @PreAuthorize("@ss.hasPermi('system:brand:remove')")
     @Log(title = "品牌", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{brandIds}")
     public AjaxResult remove(@PathVariable Long[] brandIds)

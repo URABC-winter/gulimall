@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/value")
+@RequestMapping("/product/productValue")
 public class PmsProductAttrValueController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class PmsProductAttrValueController extends BaseController
     /**
      * 查询spu属性值列表
      */
-    @PreAuthorize("@ss.hasPermi('system:value:list')")
     @GetMapping("/list")
     public TableDataInfo list(PmsProductAttrValue pmsProductAttrValue)
     {
@@ -49,7 +48,6 @@ public class PmsProductAttrValueController extends BaseController
     /**
      * 导出spu属性值列表
      */
-    @PreAuthorize("@ss.hasPermi('system:value:export')")
     @Log(title = "spu属性值", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, PmsProductAttrValue pmsProductAttrValue)
@@ -62,7 +60,6 @@ public class PmsProductAttrValueController extends BaseController
     /**
      * 获取spu属性值详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:value:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class PmsProductAttrValueController extends BaseController
     /**
      * 新增spu属性值
      */
-    @PreAuthorize("@ss.hasPermi('system:value:add')")
     @Log(title = "spu属性值", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PmsProductAttrValue pmsProductAttrValue)
@@ -83,7 +79,6 @@ public class PmsProductAttrValueController extends BaseController
     /**
      * 修改spu属性值
      */
-    @PreAuthorize("@ss.hasPermi('system:value:edit')")
     @Log(title = "spu属性值", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PmsProductAttrValue pmsProductAttrValue)
@@ -94,7 +89,6 @@ public class PmsProductAttrValueController extends BaseController
     /**
      * 删除spu属性值
      */
-    @PreAuthorize("@ss.hasPermi('system:value:remove')")
     @Log(title = "spu属性值", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

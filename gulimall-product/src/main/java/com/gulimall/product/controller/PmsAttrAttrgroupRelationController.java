@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/relation")
+@RequestMapping("/product/groupRelation")
 public class PmsAttrAttrgroupRelationController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class PmsAttrAttrgroupRelationController extends BaseController
     /**
      * 查询属性&属性分组关联列表
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:list')")
     @GetMapping("/list")
     public TableDataInfo list(PmsAttrAttrgroupRelation pmsAttrAttrgroupRelation)
     {
@@ -49,7 +48,6 @@ public class PmsAttrAttrgroupRelationController extends BaseController
     /**
      * 导出属性&属性分组关联列表
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:export')")
     @Log(title = "属性&属性分组关联", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, PmsAttrAttrgroupRelation pmsAttrAttrgroupRelation)
@@ -62,7 +60,6 @@ public class PmsAttrAttrgroupRelationController extends BaseController
     /**
      * 获取属性&属性分组关联详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class PmsAttrAttrgroupRelationController extends BaseController
     /**
      * 新增属性&属性分组关联
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:add')")
     @Log(title = "属性&属性分组关联", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PmsAttrAttrgroupRelation pmsAttrAttrgroupRelation)
@@ -83,7 +79,6 @@ public class PmsAttrAttrgroupRelationController extends BaseController
     /**
      * 修改属性&属性分组关联
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:edit')")
     @Log(title = "属性&属性分组关联", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PmsAttrAttrgroupRelation pmsAttrAttrgroupRelation)
@@ -94,7 +89,6 @@ public class PmsAttrAttrgroupRelationController extends BaseController
     /**
      * 删除属性&属性分组关联
      */
-    @PreAuthorize("@ss.hasPermi('system:relation:remove')")
     @Log(title = "属性&属性分组关联", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

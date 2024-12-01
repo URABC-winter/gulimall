@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/replay")
+@RequestMapping("/product/replay")
 public class PmsCommentReplayController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class PmsCommentReplayController extends BaseController
     /**
      * 查询商品评价回复关系列表
      */
-    @PreAuthorize("@ss.hasPermi('system:replay:list')")
     @GetMapping("/list")
     public TableDataInfo list(PmsCommentReplay pmsCommentReplay)
     {
@@ -49,7 +48,6 @@ public class PmsCommentReplayController extends BaseController
     /**
      * 导出商品评价回复关系列表
      */
-    @PreAuthorize("@ss.hasPermi('system:replay:export')")
     @Log(title = "商品评价回复关系", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, PmsCommentReplay pmsCommentReplay)
@@ -62,7 +60,6 @@ public class PmsCommentReplayController extends BaseController
     /**
      * 获取商品评价回复关系详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:replay:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class PmsCommentReplayController extends BaseController
     /**
      * 新增商品评价回复关系
      */
-    @PreAuthorize("@ss.hasPermi('system:replay:add')")
     @Log(title = "商品评价回复关系", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PmsCommentReplay pmsCommentReplay)
@@ -83,7 +79,6 @@ public class PmsCommentReplayController extends BaseController
     /**
      * 修改商品评价回复关系
      */
-    @PreAuthorize("@ss.hasPermi('system:replay:edit')")
     @Log(title = "商品评价回复关系", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PmsCommentReplay pmsCommentReplay)
@@ -94,7 +89,6 @@ public class PmsCommentReplayController extends BaseController
     /**
      * 删除商品评价回复关系
      */
-    @PreAuthorize("@ss.hasPermi('system:replay:remove')")
     @Log(title = "商品评价回复关系", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

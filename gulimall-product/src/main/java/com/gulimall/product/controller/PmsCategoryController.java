@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/category")
+@RequestMapping("/product/category")
 public class PmsCategoryController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class PmsCategoryController extends BaseController
     /**
      * 查询商品三级分类列表
      */
-    @PreAuthorize("@ss.hasPermi('system:category:list')")
     @GetMapping("/list")
     public TableDataInfo list(PmsCategory pmsCategory)
     {
@@ -49,7 +48,6 @@ public class PmsCategoryController extends BaseController
     /**
      * 导出商品三级分类列表
      */
-    @PreAuthorize("@ss.hasPermi('system:category:export')")
     @Log(title = "商品三级分类", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, PmsCategory pmsCategory)
@@ -62,7 +60,6 @@ public class PmsCategoryController extends BaseController
     /**
      * 获取商品三级分类详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:category:query')")
     @GetMapping(value = "/{catId}")
     public AjaxResult getInfo(@PathVariable("catId") Long catId)
     {
@@ -72,7 +69,6 @@ public class PmsCategoryController extends BaseController
     /**
      * 新增商品三级分类
      */
-    @PreAuthorize("@ss.hasPermi('system:category:add')")
     @Log(title = "商品三级分类", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PmsCategory pmsCategory)
@@ -83,7 +79,6 @@ public class PmsCategoryController extends BaseController
     /**
      * 修改商品三级分类
      */
-    @PreAuthorize("@ss.hasPermi('system:category:edit')")
     @Log(title = "商品三级分类", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PmsCategory pmsCategory)
@@ -94,7 +89,6 @@ public class PmsCategoryController extends BaseController
     /**
      * 删除商品三级分类
      */
-    @PreAuthorize("@ss.hasPermi('system:category:remove')")
     @Log(title = "商品三级分类", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{catIds}")
     public AjaxResult remove(@PathVariable Long[] catIds)

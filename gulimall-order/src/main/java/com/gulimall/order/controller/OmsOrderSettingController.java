@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/setting")
+@RequestMapping("/product/setting")
 public class OmsOrderSettingController extends BaseController
 {
     @Autowired

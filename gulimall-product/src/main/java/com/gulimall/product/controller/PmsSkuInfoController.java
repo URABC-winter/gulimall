@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/info")
+@RequestMapping("/product/skuInfo")
 public class PmsSkuInfoController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class PmsSkuInfoController extends BaseController
     /**
      * 查询sku信息列表
      */
-    @PreAuthorize("@ss.hasPermi('system:info:list')")
     @GetMapping("/list")
     public TableDataInfo list(PmsSkuInfo pmsSkuInfo)
     {
@@ -49,7 +48,6 @@ public class PmsSkuInfoController extends BaseController
     /**
      * 导出sku信息列表
      */
-    @PreAuthorize("@ss.hasPermi('system:info:export')")
     @Log(title = "sku信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, PmsSkuInfo pmsSkuInfo)
@@ -62,7 +60,6 @@ public class PmsSkuInfoController extends BaseController
     /**
      * 获取sku信息详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:info:query')")
     @GetMapping(value = "/{skuId}")
     public AjaxResult getInfo(@PathVariable("skuId") Long skuId)
     {
@@ -72,7 +69,6 @@ public class PmsSkuInfoController extends BaseController
     /**
      * 新增sku信息
      */
-    @PreAuthorize("@ss.hasPermi('system:info:add')")
     @Log(title = "sku信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PmsSkuInfo pmsSkuInfo)
@@ -83,7 +79,6 @@ public class PmsSkuInfoController extends BaseController
     /**
      * 修改sku信息
      */
-    @PreAuthorize("@ss.hasPermi('system:info:edit')")
     @Log(title = "sku信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PmsSkuInfo pmsSkuInfo)
@@ -94,7 +89,6 @@ public class PmsSkuInfoController extends BaseController
     /**
      * 删除sku信息
      */
-    @PreAuthorize("@ss.hasPermi('system:info:remove')")
     @Log(title = "sku信息", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{skuIds}")
     public AjaxResult remove(@PathVariable Long[] skuIds)

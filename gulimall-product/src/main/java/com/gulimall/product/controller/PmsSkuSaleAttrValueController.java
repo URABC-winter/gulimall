@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/value")
+@RequestMapping("/product/saleValue")
 public class PmsSkuSaleAttrValueController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class PmsSkuSaleAttrValueController extends BaseController
     /**
      * 查询sku销售属性&值列表
      */
-    @PreAuthorize("@ss.hasPermi('system:value:list')")
     @GetMapping("/list")
     public TableDataInfo list(PmsSkuSaleAttrValue pmsSkuSaleAttrValue)
     {
@@ -49,7 +48,6 @@ public class PmsSkuSaleAttrValueController extends BaseController
     /**
      * 导出sku销售属性&值列表
      */
-    @PreAuthorize("@ss.hasPermi('system:value:export')")
     @Log(title = "sku销售属性&值", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, PmsSkuSaleAttrValue pmsSkuSaleAttrValue)
@@ -62,7 +60,6 @@ public class PmsSkuSaleAttrValueController extends BaseController
     /**
      * 获取sku销售属性&值详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:value:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class PmsSkuSaleAttrValueController extends BaseController
     /**
      * 新增sku销售属性&值
      */
-    @PreAuthorize("@ss.hasPermi('system:value:add')")
     @Log(title = "sku销售属性&值", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PmsSkuSaleAttrValue pmsSkuSaleAttrValue)
@@ -83,7 +79,6 @@ public class PmsSkuSaleAttrValueController extends BaseController
     /**
      * 修改sku销售属性&值
      */
-    @PreAuthorize("@ss.hasPermi('system:value:edit')")
     @Log(title = "sku销售属性&值", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PmsSkuSaleAttrValue pmsSkuSaleAttrValue)
@@ -94,7 +89,6 @@ public class PmsSkuSaleAttrValueController extends BaseController
     /**
      * 删除sku销售属性&值
      */
-    @PreAuthorize("@ss.hasPermi('system:value:remove')")
     @Log(title = "sku销售属性&值", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

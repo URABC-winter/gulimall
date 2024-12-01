@@ -29,7 +29,7 @@ import com.gulimall.system.service.ISysUserService;
  * @author ruoyi
  */
 @RestController
-@RequestMapping("/system/user/profile")
+@RequestMapping("/product/user/profile")
 public class SysProfileController extends BaseController
 {
     @Autowired

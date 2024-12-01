@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/purchase")
+@RequestMapping("/product/purchase")
 public class WmsPurchaseController extends BaseController
 {
     @Autowired

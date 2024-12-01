@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/comment")
+@RequestMapping("/product/comment")
 public class PmsSpuCommentController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class PmsSpuCommentController extends BaseController
     /**
      * 查询商品评价列表
      */
-    @PreAuthorize("@ss.hasPermi('system:comment:list')")
     @GetMapping("/list")
     public TableDataInfo list(PmsSpuComment pmsSpuComment)
     {
@@ -49,7 +48,6 @@ public class PmsSpuCommentController extends BaseController
     /**
      * 导出商品评价列表
      */
-    @PreAuthorize("@ss.hasPermi('system:comment:export')")
     @Log(title = "商品评价", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, PmsSpuComment pmsSpuComment)
@@ -62,7 +60,6 @@ public class PmsSpuCommentController extends BaseController
     /**
      * 获取商品评价详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:comment:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class PmsSpuCommentController extends BaseController
     /**
      * 新增商品评价
      */
-    @PreAuthorize("@ss.hasPermi('system:comment:add')")
     @Log(title = "商品评价", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PmsSpuComment pmsSpuComment)
@@ -83,7 +79,6 @@ public class PmsSpuCommentController extends BaseController
     /**
      * 修改商品评价
      */
-    @PreAuthorize("@ss.hasPermi('system:comment:edit')")
     @Log(title = "商品评价", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PmsSpuComment pmsSpuComment)
@@ -94,7 +89,6 @@ public class PmsSpuCommentController extends BaseController
     /**
      * 删除商品评价
      */
-    @PreAuthorize("@ss.hasPermi('system:comment:remove')")
     @Log(title = "商品评价", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

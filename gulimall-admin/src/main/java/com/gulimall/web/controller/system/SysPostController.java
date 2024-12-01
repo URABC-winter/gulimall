@@ -28,7 +28,7 @@ import com.gulimall.system.service.ISysPostService;
  * @author ruoyi
  */
 @RestController
-@RequestMapping("/system/post")
+@RequestMapping("/product/post")
 public class SysPostController extends BaseController
 {
     @Autowired

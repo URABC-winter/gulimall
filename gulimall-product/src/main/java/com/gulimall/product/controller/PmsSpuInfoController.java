@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/info")
+@RequestMapping("/product/spuInfo")
 public class PmsSpuInfoController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class PmsSpuInfoController extends BaseController
     /**
      * 查询spu信息列表
      */
-    @PreAuthorize("@ss.hasPermi('system:info:list')")
     @GetMapping("/list")
     public TableDataInfo list(PmsSpuInfo pmsSpuInfo)
     {
@@ -49,7 +48,6 @@ public class PmsSpuInfoController extends BaseController
     /**
      * 导出spu信息列表
      */
-    @PreAuthorize("@ss.hasPermi('system:info:export')")
     @Log(title = "spu信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, PmsSpuInfo pmsSpuInfo)
@@ -62,7 +60,6 @@ public class PmsSpuInfoController extends BaseController
     /**
      * 获取spu信息详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:info:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +69,6 @@ public class PmsSpuInfoController extends BaseController
     /**
      * 新增spu信息
      */
-    @PreAuthorize("@ss.hasPermi('system:info:add')")
     @Log(title = "spu信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PmsSpuInfo pmsSpuInfo)
@@ -83,7 +79,6 @@ public class PmsSpuInfoController extends BaseController
     /**
      * 修改spu信息
      */
-    @PreAuthorize("@ss.hasPermi('system:info:edit')")
     @Log(title = "spu信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PmsSpuInfo pmsSpuInfo)
@@ -94,7 +89,6 @@ public class PmsSpuInfoController extends BaseController
     /**
      * 删除spu信息
      */
-    @PreAuthorize("@ss.hasPermi('system:info:remove')")
     @Log(title = "spu信息", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

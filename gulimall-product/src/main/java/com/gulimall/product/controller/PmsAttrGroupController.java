@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/group")
+@RequestMapping("/product/group")
 public class PmsAttrGroupController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class PmsAttrGroupController extends BaseController
     /**
      * 查询属性分组列表
      */
-    @PreAuthorize("@ss.hasPermi('system:group:list')")
     @GetMapping("/list")
     public TableDataInfo list(PmsAttrGroup pmsAttrGroup)
     {
@@ -49,7 +48,6 @@ public class PmsAttrGroupController extends BaseController
     /**
      * 导出属性分组列表
      */
-    @PreAuthorize("@ss.hasPermi('system:group:export')")
     @Log(title = "属性分组", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, PmsAttrGroup pmsAttrGroup)
@@ -62,7 +60,6 @@ public class PmsAttrGroupController extends BaseController
     /**
      * 获取属性分组详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:group:query')")
     @GetMapping(value = "/{attrGroupId}")
     public AjaxResult getInfo(@PathVariable("attrGroupId") Long attrGroupId)
     {
@@ -72,7 +69,6 @@ public class PmsAttrGroupController extends BaseController
     /**
      * 新增属性分组
      */
-    @PreAuthorize("@ss.hasPermi('system:group:add')")
     @Log(title = "属性分组", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PmsAttrGroup pmsAttrGroup)
@@ -83,7 +79,6 @@ public class PmsAttrGroupController extends BaseController
     /**
      * 修改属性分组
      */
-    @PreAuthorize("@ss.hasPermi('system:group:edit')")
     @Log(title = "属性分组", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PmsAttrGroup pmsAttrGroup)
@@ -94,7 +89,6 @@ public class PmsAttrGroupController extends BaseController
     /**
      * 删除属性分组
      */
-    @PreAuthorize("@ss.hasPermi('system:group:remove')")
     @Log(title = "属性分组", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{attrGroupIds}")
     public AjaxResult remove(@PathVariable Long[] attrGroupIds)

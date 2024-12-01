@@ -28,7 +28,7 @@ import com.gulimall.common.core.page.TableDataInfo;
  * @date 2024-11-23
  */
 @RestController
-@RequestMapping("/system/attr")
+@RequestMapping("/product/attr")
 public class PmsAttrController extends BaseController
 {
     @Autowired
@@ -37,7 +37,6 @@ public class PmsAttrController extends BaseController
     /**
      * 查询商品属性列表
      */
-    @PreAuthorize("@ss.hasPermi('system:attr:list')")
     @GetMapping("/list")
     public TableDataInfo list(PmsAttr pmsAttr)
     {
@@ -49,7 +48,6 @@ public class PmsAttrController extends BaseController
     /**
      * 导出商品属性列表
      */
-    @PreAuthorize("@ss.hasPermi('system:attr:export')")
     @Log(title = "商品属性", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, PmsAttr pmsAttr)
@@ -62,7 +60,6 @@ public class PmsAttrController extends BaseController
     /**
      * 获取商品属性详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:attr:query')")
     @GetMapping(value = "/{attrId}")
     public AjaxResult getInfo(@PathVariable("attrId") Long attrId)
     {
@@ -72,7 +69,6 @@ public class PmsAttrController extends BaseController
     /**
      * 新增商品属性
      */
-    @PreAuthorize("@ss.hasPermi('system:attr:add')")
     @Log(title = "商品属性", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PmsAttr pmsAttr)
@@ -83,7 +79,6 @@ public class PmsAttrController extends BaseController
     /**
      * 修改商品属性
      */
-    @PreAuthorize("@ss.hasPermi('system:attr:edit')")
     @Log(title = "商品属性", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PmsAttr pmsAttr)
@@ -94,7 +89,6 @@ public class PmsAttrController extends BaseController
     /**
      * 删除商品属性
      */
-    @PreAuthorize("@ss.hasPermi('system:attr:remove')")
     @Log(title = "商品属性", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{attrIds}")
     public AjaxResult remove(@PathVariable Long[] attrIds)
