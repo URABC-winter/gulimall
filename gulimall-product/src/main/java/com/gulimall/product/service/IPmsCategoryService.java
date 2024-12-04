@@ -58,4 +58,6 @@ public interface IPmsCategoryService
      * @return 结果
      */
     public int deletePmsCategoryByCatId(Long catId);
+
+    public List<PmsCategory> selectPmsCategoryListTree(PmsCategory pmsCategory);
 }

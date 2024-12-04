@@ -5,6 +5,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.gulimall.common.annotation.Excel;
 import com.gulimall.common.core.domain.BaseEntity;
 
+import java.util.List;
+
 /**
  * 商品三级分类对象 pms_category
  * 
@@ -36,7 +38,7 @@ public class PmsCategory extends BaseEntity
 
     /** 排序 */
     @Excel(name = "排序")
-    private Long sort;
+    private Integer sort;
 
     /** 图标地址 */
     @Excel(name = "图标地址")
@@ -49,6 +51,8 @@ public class PmsCategory extends BaseEntity
     /** 商品数量 */
     @Excel(name = "商品数量")
     private Long productCount;
+
+    private List<PmsCategory> Childrens;
 
     public void setCatId(Long catId) 
     {
@@ -95,12 +99,12 @@ public class PmsCategory extends BaseEntity
     {
         return showStatus;
     }
-    public void setSort(Long sort) 
+    public void setSort(Integer sort)
     {
         this.sort = sort;
     }
 
-    public Long getSort() 
+    public Integer getSort()
     {
         return sort;
     }
@@ -145,5 +149,13 @@ public class PmsCategory extends BaseEntity
             .append("productUnit", getProductUnit())
             .append("productCount", getProductCount())
             .toString();
+    }
+
+    public List<PmsCategory> getChildrens() {
+        return Childrens;
+    }
+
+    public void setChildrens(List<PmsCategory> childrens) {
+        Childrens = childrens;
     }
 }

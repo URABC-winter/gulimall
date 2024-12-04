@@ -1,6 +1,8 @@
 package com.gulimall.product.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gulimall.product.mapper.PmsCategoryMapper;
@@ -89,5 +91,34 @@ public class PmsCategoryServiceImpl implements IPmsCategoryService
     public int deletePmsCategoryByCatId(Long catId)
     {
         return pmsCategoryMapper.deletePmsCategoryByCatId(catId);
+    }
+
+    @Override
+    public List<PmsCategory> selectPmsCategoryListTree(PmsCategory pmsCategory) {
+        List<PmsCategory> list = pmsCategoryMapper.selectPmsCategoryList(pmsCategory);
+        List<PmsCategory> level1Menus = list.stream().filter(
+                menu -> menu.getParentCid() == 0
+        ).map((menu) -> {
+            menu.setChildrens(getChildrens(menu, list));
+            return menu;
+        }).sorted((menu1,menu2) -> {
+                    return (menu1.getSort() == null ? 0 : menu1.getSort()) - (menu2.getSort() == null ? 0 : menu2.getSort());
+                }
+        ).collect(Collectors.toList());
+        //return getDataTable(list);
+        return level1Menus;
+    }
+
+    private List<PmsCategory> getChildrens(PmsCategory root, List<PmsCategory> list) {
+        List<PmsCategory> children = list.stream().filter(
+                menu -> menu.getParentCid().equals(root.getCatId())
+        ).map((menu) -> {
+            menu.setChildrens(getChildrens(menu, list));
+            return menu;
+        }).sorted((menu1,menu2) -> {
+                    return (menu1.getSort() == null ? 0 : menu1.getSort()) - (menu2.getSort() == null ? 0 : menu2.getSort());
+                }
+        ).collect(Collectors.toList());
+        return children;
     }
 }

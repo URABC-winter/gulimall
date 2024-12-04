@@ -1,6 +1,7 @@
 package com.gulimall.product.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,16 @@ public class PmsCategoryController extends BaseController
         startPage();
         List<PmsCategory> list = pmsCategoryService.selectPmsCategoryList(pmsCategory);
         return getDataTable(list);
+    }
+
+    /**
+     * 生成树型
+     */
+    @GetMapping("/list/tree")
+    public List<PmsCategory> listTree(PmsCategory pmsCategory)
+    {
+        List<PmsCategory> list = pmsCategoryService.selectPmsCategoryListTree(pmsCategory);
+        return list;
     }
 
     /**
@@ -95,4 +106,6 @@ public class PmsCategoryController extends BaseController
     {
         return toAjax(pmsCategoryService.deletePmsCategoryByCatIds(catIds));
     }
+
+
 }
