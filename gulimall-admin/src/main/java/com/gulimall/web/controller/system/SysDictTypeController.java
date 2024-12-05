@@ -28,7 +28,7 @@ import com.gulimall.system.service.ISysDictTypeService;
  * @author ruoyi
  */
 @RestController
-@RequestMapping("/product/dict/type")
+@RequestMapping("/system/dict/type")
 public class SysDictTypeController extends BaseController
 {
     @Autowired

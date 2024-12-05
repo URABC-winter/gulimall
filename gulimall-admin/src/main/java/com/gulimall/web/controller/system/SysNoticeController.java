@@ -26,7 +26,7 @@ import com.gulimall.system.service.ISysNoticeService;
  * @author ruoyi
  */
 @RestController
-@RequestMapping("/product/notice")
+@RequestMapping("/system/notice")
 public class SysNoticeController extends BaseController
 {
     @Autowired

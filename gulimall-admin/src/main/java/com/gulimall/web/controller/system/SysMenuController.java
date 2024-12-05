@@ -27,7 +27,7 @@ import com.gulimall.system.service.ISysMenuService;
  * @author ruoyi
  */
 @RestController
-@RequestMapping("/product/menu")
+@RequestMapping("/system/menu")
 public class SysMenuController extends BaseController
 {
     @Autowired

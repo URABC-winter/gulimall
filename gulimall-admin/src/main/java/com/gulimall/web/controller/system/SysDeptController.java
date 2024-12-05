@@ -28,7 +28,7 @@ import com.gulimall.system.service.ISysDeptService;
  * @author ruoyi
  */
 @RestController
-@RequestMapping("/product/dept")
+@RequestMapping("/system/dept")
 public class SysDeptController extends BaseController
 {
     @Autowired

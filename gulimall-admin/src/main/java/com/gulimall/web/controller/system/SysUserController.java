@@ -38,7 +38,7 @@ import com.gulimall.system.service.ISysUserService;
  * @author ruoyi
  */
 @RestController
-@RequestMapping("/product/user")
+@RequestMapping("/system/user")
 public class SysUserController extends BaseController
 {
     @Autowired

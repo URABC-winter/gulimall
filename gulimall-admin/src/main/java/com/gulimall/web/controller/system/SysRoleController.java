@@ -37,7 +37,7 @@ import com.gulimall.system.service.ISysUserService;
  * @author ruoyi
  */
 @RestController
-@RequestMapping("/product/role")
+@RequestMapping("/system/role")
 public class SysRoleController extends BaseController
 {
     @Autowired
