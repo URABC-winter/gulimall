@@ -25,7 +25,7 @@ import com.gulimall.system.service.ISysOperLogService;
  * @author ruoyi
  */
 @RestController
-@RequestMapping("/monitor/operlog")
+@RequestMapping("/admin/monitor/operlog")
 public class SysOperlogController extends BaseController
 {
     @Autowired

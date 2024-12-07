@@ -26,7 +26,7 @@ import com.gulimall.system.service.ISysLogininforService;
  * @author ruoyi
  */
 @RestController
-@RequestMapping("/monitor/logininfor")
+@RequestMapping("/admin/monitor/logininfor")
 public class SysLogininforController extends BaseController
 {
     @Autowired

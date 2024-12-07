@@ -28,7 +28,7 @@ import com.gulimall.system.service.ISysConfigService;
  * @author ruoyi
  */
 @RestController
-@RequestMapping("/system/config")
+@RequestMapping("/admin/system/config")
 public class SysConfigController extends BaseController
 {
     @Autowired

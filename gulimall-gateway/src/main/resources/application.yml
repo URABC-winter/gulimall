@@ -1,5 +1,5 @@
 server:
-  port: 10006
+  port: 10001
 
 spring:
   application:
@@ -7,14 +7,16 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: qq_route
-          uri: https://www.qq.com
+        - id: admin_route
+          uri: lb://gulimall-admin
           predicates:
-            - Query=url,qq
-        - id: baidu_route
-          uri: https://www.baidu.com
+            - Path=/main/**
+          filters:
+            - RewritePath=/main/(?<segment>.*),/admin/$\{segment}
+        - id: product_route
+          uri: lb://gulimall-product
           predicates:
-            - Query=url,baidu
+            - Path=/product/**
     nacos:
       serverAddr: 127.0.0.1:8848
       # 以下配置项必须填写
@@ -25,6 +27,5 @@ spring:
   config:
     import:
       - nacos:gulimall-gateway.yaml?refreshEnabled=true&group=DEFAULT_GROUP
-
 
 

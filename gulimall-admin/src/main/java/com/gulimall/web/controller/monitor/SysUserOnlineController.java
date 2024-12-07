@@ -29,7 +29,7 @@ import com.gulimall.system.service.ISysUserOnlineService;
  * @author ruoyi
  */
 @RestController
-@RequestMapping("/monitor/online")
+@RequestMapping("/admin/monitor/online")
 public class SysUserOnlineController extends BaseController
 {
     @Autowired

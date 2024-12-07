@@ -18,7 +18,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-        <spring-boot.version>2.5.15</spring-boot.version>
+        <spring-boot.version>2.6.13</spring-boot.version>
         <druid.version>1.2.23</druid.version>
         <bitwalker.version>1.21</bitwalker.version>
         <swagger.version>3.0.0</swagger.version>
@@ -35,7 +35,7 @@
         <logback.version>1.2.13</logback.version>
         <spring-security.version>5.7.12</spring-security.version>
         <spring-framework.version>5.3.39</spring-framework.version>
-        <cloud.version>3.1.5</cloud.version>
+        <cloud.version>2021.0.5</cloud.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -221,8 +221,11 @@
 
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-context</artifactId>
+<!--                <artifactId>spring-cloud-context</artifactId>-->
+                <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
         </dependencies>
@@ -234,7 +237,6 @@
         <module>gulimall-system</module>
         <module>gulimall-generator</module>
         <module>gulimall-common</module>
-        <module>gulimall-generic</module>
         <module>gulimall-coupou</module>
         <module>gulimall-member</module>
         <module>gulimall-order</module>

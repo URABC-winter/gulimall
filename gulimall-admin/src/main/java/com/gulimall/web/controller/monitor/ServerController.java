@@ -13,7 +13,7 @@ import com.gulimall.framework.web.domain.Server;
  * @author ruoyi
  */
 @RestController
-@RequestMapping("/monitor/server")
+@RequestMapping("/admin/monitor/server")
 public class ServerController
 {
     @PreAuthorize("@ss.hasPermi('monitor:server:list')")

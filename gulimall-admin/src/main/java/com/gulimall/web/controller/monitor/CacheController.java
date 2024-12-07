@@ -28,7 +28,7 @@ import com.gulimall.system.domain.SysCache;
  * @author ruoyi
  */
 @RestController
-@RequestMapping("/monitor/cache")
+@RequestMapping("/admin/monitor/cache")
 public class CacheController
 {
     @Autowired

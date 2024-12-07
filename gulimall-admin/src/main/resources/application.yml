@@ -47,6 +47,18 @@ user:
 
 # Spring配置
 spring:
+  application:
+    name: gulimall-admin
+  cloud:
+    nacos:
+      # 以下配置项必须填写
+      username: 'nacos'
+      password: 'nacos'
+      discovery:
+        serverAddr: 127.0.0.1:8848
+      config:
+        import-check:
+          enabled: false
   # 资源信息
   messages:
     # 国际化资源文件路径
@@ -111,13 +123,6 @@ pagehelper:
   helperDialect: mysql
   supportMethodsArguments: true
   params: count=countSql
-
-# Swagger配置
-swagger:
-  # 是否开启swagger
-  enabled: true
-  # 请求前缀
-  pathMapping: /dev-api
 
 # 防止XSS攻击
 xss:

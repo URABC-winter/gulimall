@@ -50,10 +50,10 @@ public class PmsCategoryController extends BaseController
      * 生成树型
      */
     @GetMapping("/list/tree")
-    public List<PmsCategory> listTree(PmsCategory pmsCategory)
+    public AjaxResult listTree(PmsCategory pmsCategory)
     {
         List<PmsCategory> list = pmsCategoryService.selectPmsCategoryListTree(pmsCategory);
-        return list;
+        return success(list);
     }
 
     /**

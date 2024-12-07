@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.google.code.kaptcha.Producer;
 import com.gulimall.common.config.RuoYiConfig;
@@ -26,6 +27,7 @@ import com.gulimall.system.service.ISysConfigService;
  * @author ruoyi
  */
 @RestController
+@RequestMapping("/admin")
 public class CaptchaController
 {
     @Resource(name = "captchaProducer")
