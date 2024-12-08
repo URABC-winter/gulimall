@@ -1,6 +1,7 @@
 <template>
   <div>
-    <el-tree :data="menus" :props="defaultProps" :expand-on-click-node="false" show-checkbox node-key="catId">
+    <el-tree :data="menus" :props="defaultProps" :expand-on-click-node="false" show-checkbox node-key="catId" 
+    :default-expanded-keys="expandedkey">
       <span class="custom-tree-node" slot-scope="{ node, data }">
         <span>{{ node.label }}</span>
         <span>
@@ -17,6 +18,7 @@ export default {
   data() {
       return {
         menus: [],
+        expandedkey: [],
         defaultProps: {
           children: 'childrens',
           label: 'name'
@@ -43,11 +45,23 @@ export default {
 
       remove(node, data) {
         this.loading = true;
-        var ids = [data.catId]
-        deleteCategory(ids).then(response => {
-          console.log("删除成功",response)
-          this.getMenu()
-        })
+        this.$confirm('是否删除【'+ data.name +'】菜单?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          var ids = [data.catId]
+          deleteCategory(ids).then(response => {
+            this.$message({
+              message: '菜单删除成功',
+              type: 'success'
+            });
+            this.getMenu()
+            this.expandedkey = [node.parent.data.catId]
+          })
+        }).catch(() => {
+
+        });
         console.log("remove", node, data)
       },
     }
