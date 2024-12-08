@@ -95,6 +95,7 @@ public class PmsCategoryServiceImpl implements IPmsCategoryService
 
     @Override
     public List<PmsCategory> selectPmsCategoryListTree(PmsCategory pmsCategory) {
+        pmsCategory.setShowStatus(1L);
         List<PmsCategory> list = pmsCategoryMapper.selectPmsCategoryList(pmsCategory);
         List<PmsCategory> level1Menus = list.stream().filter(
                 menu -> menu.getParentCid() == 0
