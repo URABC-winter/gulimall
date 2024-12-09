@@ -10,11 +10,11 @@ export function category(query) {
 }
 
 //添加商品
-export function addCategory(query) {
+export function addCategory(category) {
     return request({
         url: 'product/category',
         method: 'post',
-        params: query
+        data: category
     })
 }
 
