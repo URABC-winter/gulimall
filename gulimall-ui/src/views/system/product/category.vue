@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-tree :data="menus" :props="defaultProps" :expand-on-click-node="false" show-checkbox node-key="catId" 
-    :default-expanded-keys="expandedkey">
+    :default-expanded-keys="expandedkey" draggable :allow-drag="allowDrop">
       <span class="custom-tree-node" slot-scope="{ node, data }">
         <span>{{ node.label }}</span>
         <span>
@@ -12,10 +12,16 @@
       </span>
     </el-tree>
 
-    <el-dialog :title="title" :visible.sync="dialogVisible" width="30%">
+    <el-dialog :title="title" :visible.sync="dialogVisible" width="30%" :close-on-click-modal="false">
       <el-form :model="category">
         <el-form-item label="分类名称">
           <el-input v-model="category.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="图标">
+          <el-input v-model="category.icon" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="计量单位">
+          <el-input v-model="category.productUnit" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -27,13 +33,22 @@
 </template>
 
 <script>
-import {category, addCategory , deleteCategory} from "@/api/system/product"
+import {category, addCategory, deleteCategory, getInfo, updateCategory} from "@/api/system/product"
 export default {
   data() {
       return {
+        maxLevel: 0,
         title: "",
         dialogType: "",
-        category: {name:"", parentCid: 0, catLevel: 0, showStatus: 1, sort: 0, catId: 0},
+        category: {
+          name:"", 
+          parentCid: 0, 
+          catLevel: 0, 
+          showStatus: 1, 
+          icon: "",
+          productUnit: "",
+          sort: 0, 
+          catId: 0},
         dialogVisible: false,
         menus: [],
         expandedkey: [],
@@ -55,13 +70,40 @@ export default {
         );
       },
 
+      allowDrop(draggingNode, dropNode, type) {
+        this.countNodeLevel(draggingNode.data)
+        //当前拖动节点 + 父节点所在深度不大于3
+        let deep = this.maxLevel - draggingNode.data.catLevel + 1
+
+        if(type == "inner") {
+          return (deep + dropNode.level) <= 3
+        } else {
+          return (deep + dropNode.parent.level) <= 3
+        }
+      },
+
+      countNodeLevel(node) {
+        if (node.children != null && node.children.length > 0) {
+          for (let i = 0; i < node.children.length; i++) {
+            if (node.children[i].catLevel > this.maxLevel) {
+              this.maxLevel = node.children[i].catLevel
+            }
+          }
+          this.countNodeLevel(node.children[i])
+        }
+      },
+
       edit(data) {
         this.title = "修改"
         this.dialogType = "edit"
         this.dialogVisible = true
-        this.category.name = data.name
-        this.category.catId = data.catId
-        console.log("edit", data)
+        getInfo(data.catId).then(response => {
+          this.category.name = data.name
+          this.category.catId = data.catId
+          this.category.icon = response.data.icon
+          this.category.productUnit = response.data.productUnit
+          this.category.parentCid = response.data.parentCid
+        })
       },
 
       append(data) {
@@ -70,6 +112,14 @@ export default {
         this.dialogVisible = true
         this.category.parentCid = data.catId
         this.category.catLevel = data.catLevel*1 + 1
+
+        //清除之前数据
+        this.category.name = ""
+        this.category.icon = ""
+        this.category.productUnit = ""
+        this.category.catId = null
+        this.category.sort = 0
+        this.category.showStatus = 1
       },
 
       submitType(){
@@ -82,11 +132,25 @@ export default {
       },
 
       appendCategory() {
-        console.log("addCategory", this.category)
         addCategory(this.category).then(response => {
           console.log("addCategory", response),
           this.$message({
-            message: '菜单删除成功',
+            message: '菜单添加成功',
+            type: 'success'
+          }),
+          this.dialogVisible = false
+          this.getMenu()
+          this.expandedkey = [this.category.parentCid]
+        })
+      },
+
+      editCategory() {
+        var {catId, name, icon, productUnit} = this.category
+        var data = {catId, name, icon, productUnit}
+        updateCategory(data).then(response => {
+          console.log("updateCategory", response),
+          this.$message({
+            message: '菜单更新成功',
             type: 'success'
           }),
           this.dialogVisible = false

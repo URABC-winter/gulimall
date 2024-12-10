@@ -25,3 +25,20 @@ export function deleteCategory(catId) {
         method: 'delete'
     })
 }
+
+//修改商品
+export function updateCategory(category) {
+    return request({
+        url: 'product/category',
+        method: 'put',
+        data: category
+    })
+}
+
+//获取详情信息
+export function getInfo(catId) {
+    return request({
+        url: 'product/category/' + catId,
+        method: 'get'
+    })
+}
