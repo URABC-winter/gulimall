@@ -1,7 +1,9 @@
 <template>
   <div>
     <el-tree :data="menus" :props="defaultProps" :expand-on-click-node="false" show-checkbox node-key="catId" 
-    :default-expanded-keys="expandedkey" draggable :allow-drag="allowDrop">
+    :default-expanded-keys="expandedkey" 
+    draggable 
+    :allow-drop="allowDrop" @node-drop="handleDrop">
       <span class="custom-tree-node" slot-scope="{ node, data }">
         <span>{{ node.label }}</span>
         <span>
@@ -37,6 +39,8 @@ import {category, addCategory, deleteCategory, getInfo, updateCategory} from "@/
 export default {
   data() {
       return {
+        pCid: [],
+        updateNodes: [],
         maxLevel: 0,
         title: "",
         dialogType: "",
@@ -73,25 +77,76 @@ export default {
       allowDrop(draggingNode, dropNode, type) {
         this.countNodeLevel(draggingNode.data)
         //当前拖动节点 + 父节点所在深度不大于3
-        let deep = this.maxLevel - draggingNode.data.catLevel + 1
+        let deep = (this.maxLevel - draggingNode.data.catLevel) + 1
+        console.log("deep: ",deep)
 
         if(type == "inner") {
-          return (deep + dropNode.level) <= 3
+          return (deep + dropNode.level) <= 3;
         } else {
-          return (deep + dropNode.parent.level) <= 3
+          return (deep + dropNode.parent.level) <= 3;
         }
       },
 
       countNodeLevel(node) {
-        if (node.children != null && node.children.length > 0) {
-          for (let i = 0; i < node.children.length; i++) {
-            if (node.children[i].catLevel > this.maxLevel) {
-              this.maxLevel = node.children[i].catLevel
+        console.log("maxLevel1: ",this.maxLevel)
+        console.log("node: ",node)
+        if (node.childrens != null && node.childrens.length > 0) {
+          for (let i = 0; i < node.childrens.length; i++) {
+            if (node.childrens[i].catLevel > this.maxLevel) {
+              this.maxLevel = node.childrens[i].catLevel
             }
+            this.countNodeLevel(node.childrens[i])
           }
-          this.countNodeLevel(node.children[i])
+        } else {
+          this.maxLevel = node.catLevel
         }
+        console.log("maxLevel2: ",this.maxLevel)
       },
+
+      handleDrop(draggingNode, dropNode, dropType, ev) {
+      //1、当前节点最新的父节点id
+      let pCid = 0;
+      let siblings = null;
+      if (dropType == "before" || dropType == "after") {
+        pCid =dropNode.parent.data.catId == undefined? 0 : dropNode.parent.data.catId;
+        siblings = dropNode.parent.childNodes;
+      } else {
+        pCid = dropNode.data.catId;
+        siblings = dropNode.childNodes;
+      }
+      this.pCid.push(pCid);
+
+      //2、当前拖拽节点的最新顺序，
+      for (let i = 0; i < siblings.length; i++) {
+        if (siblings[i].data.catId == draggingNode.data.catId) {
+          //如果遍历的是当前正在拖拽的节点
+          let catLevel = draggingNode.level;
+          if (siblings[i].level != draggingNode.level) {
+            //当前节点的层级发生变化
+            catLevel = siblings[i].level;
+            //修改他子节点的层级
+            this.updateChildNodeLevel(siblings[i]);
+          }
+          this.updateNodes.push({ catId: siblings[i].data.catId, sort: i, parentCid: pCid, catLevel: catLevel});
+        } else {
+          this.updateNodes.push({ catId: siblings[i].data.catId, sort: i });
+        }
+      }
+
+      //3、当前拖拽节点的最新层级
+      console.log("updateNodes", this.updateNodes);
+    },
+
+    updateChildNodeLevel(node) {
+      if (node.childNodes.length > 0) {
+        for (let i = 0; i < node.childNodes.length; i++) {
+          var cNode = node.childNodes[i].data;
+          this.updateNodes.push({catId: cNode.catId,catLevel: node.childNodes[i].level});
+          this.updateChildNodeLevel(node.childNodes[i]);
+        }
+      }
+    },
+
 
       edit(data) {
         this.title = "修改"
