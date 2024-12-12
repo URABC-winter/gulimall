@@ -1,5 +1,6 @@
 package com.gulimall.product.controller;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
@@ -95,6 +96,14 @@ public class PmsCategoryController extends BaseController
     public AjaxResult edit(@RequestBody PmsCategory pmsCategory)
     {
         return toAjax(pmsCategoryService.updatePmsCategory(pmsCategory));
+    }
+
+    @Log(title = "批量商品三级分类", businessType = BusinessType.UPDATE)
+    @PutMapping("/update")
+    public AjaxResult updates(@RequestBody PmsCategory[] pmsCategories)
+    {
+        List<PmsCategory> pmsCategory = Arrays.asList(pmsCategories);
+        return toAjax(pmsCategoryService.updatePmsCategoryList(pmsCategory));
     }
 
     /**

@@ -78,6 +78,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where cat_id = #{catId}
     </update>
 
+    <update id="updatePmsCategoryList" parameterType="java.util.List">
+        <foreach collection="list" item="item" separator=";">
+            update pms_category
+            <trim prefix="SET" suffixOverrides=",">
+                <if test="item.name != null">name = #{item.name},</if>
+                <if test="item.parentCid != null">parent_cid = #{item.parentCid},</if>
+                <if test="item.catLevel != null">cat_level = #{item.catLevel},</if>
+                <if test="item.showStatus != null">show_status = #{item.showStatus},</if>
+                <if test="item.sort != null">sort = #{item.sort},</if>
+                <if test="item.icon != null">icon = #{item.icon},</if>
+                <if test="item.productUnit != null">product_unit = #{item.productUnit},</if>
+                <if test="item.productCount != null">product_count = #{item.productCount},</if>
+            </trim>
+            where cat_id = #{item.catId}
+        </foreach>
+    </update>
+
     <delete id="deletePmsCategoryByCatId" parameterType="Long">
         update pms_category set show_status = 0 where cat_id = #{catId}
     </delete>

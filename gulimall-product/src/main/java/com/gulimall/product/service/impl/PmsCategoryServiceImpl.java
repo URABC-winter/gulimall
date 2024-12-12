@@ -110,6 +110,11 @@ public class PmsCategoryServiceImpl implements IPmsCategoryService
         return level1Menus;
     }
 
+    @Override
+    public int updatePmsCategoryList(List<PmsCategory> pmsCategory) {
+        return pmsCategoryMapper.updatePmsCategoryList(pmsCategory);
+    }
+
     private List<PmsCategory> getChildrens(PmsCategory root, List<PmsCategory> list) {
         List<PmsCategory> children = list.stream().filter(
                 menu -> menu.getParentCid().equals(root.getCatId())

@@ -60,4 +60,6 @@ public interface IPmsCategoryService
     public int deletePmsCategoryByCatId(Long catId);
 
     public List<PmsCategory> selectPmsCategoryListTree(PmsCategory pmsCategory);
+
+    int updatePmsCategoryList(List<PmsCategory> pmsCategory);
 }

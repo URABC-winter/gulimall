@@ -58,4 +58,6 @@ public interface PmsCategoryMapper
      * @return 结果
      */
     public int deletePmsCategoryByCatIds(Long[] catIds);
+
+    int updatePmsCategoryList(List<PmsCategory> pmsCategory);
 }
