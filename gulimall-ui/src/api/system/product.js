@@ -35,6 +35,17 @@ export function updateCategory(category) {
     })
 }
 
+//批量修改商品
+export function updateCategories(Categories) {
+    return request({
+        url: 'product/category/update',
+        method: 'put',
+        data: Categories
+    })
+}
+
+//批量删除商品
+
 //获取详情信息
 export function getInfo(catId) {
     return request({
