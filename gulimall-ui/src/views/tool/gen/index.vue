@@ -280,7 +280,7 @@ export default {
           this.$modal.msgSuccess("成功生成到自定义路径：" + row.genPath);
         });
       } else {
-        this.$download.zip("/tool/gen/batchGenCode?tables=" + tableNames, "ruoyi.zip");
+        this.$download.zip("main/tool/gen/batchGenCode?tables=" + tableNames, "ruoyi.zip");
       }
     },
     /** 同步数据库操作 */
