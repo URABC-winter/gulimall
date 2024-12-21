@@ -83,7 +83,12 @@
         <el-table-column label="品牌名" align="center" prop="name" />
         <el-table-column label="品牌logo地址" align="center" prop="logo" />
         <el-table-column label="介绍" align="center" prop="descript" />
-        <el-table-column label="显示状态[0-不显示；1-显示]" align="center" prop="showStatus" />
+        <el-table-column label="显示状态" align="center" prop="showStatus">
+          <template slot-scope="scope">
+            <el-switch v-model="scope.row.showStatus" active-color="#13ce66" inactive-color="#ff4949"
+            :active-value="1" :inactive-value="0" @change="updateBrandStatus(scope.row)"></el-switch>
+          </template>
+        </el-table-column>
         <el-table-column label="检索首字母" align="center" prop="firstLetter" />
         <el-table-column label="排序" align="center" prop="sort" />
         <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
@@ -116,7 +121,7 @@
   
       <!-- 添加或修改品牌对话框 -->
       <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-        <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+        <el-form ref="form" :model="form" :rules="rules" label-width="100px">
           <el-form-item label="品牌名" prop="name">
             <el-input v-model="form.name" placeholder="请输入品牌名" />
           </el-form-item>
@@ -125,6 +130,9 @@
           </el-form-item>
           <el-form-item label="介绍" prop="descript">
             <el-input v-model="form.descript" type="textarea" placeholder="请输入内容" />
+          </el-form-item>
+          <el-form-item label="显示状态" prop="showStatus">
+            <el-switch v-model="form.showStatus" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
           </el-form-item>
           <el-form-item label="检索首字母" prop="firstLetter">
             <el-input v-model="form.firstLetter" placeholder="请输入检索首字母" />
@@ -230,6 +238,16 @@
         this.ids = selection.map(item => item.brandId)
         this.single = selection.length!==1
         this.multiple = !selection.length
+      },
+      // 更新显示状态
+      updateBrandStatus(data){
+        // let {brandId,status} = data
+        updateBrand(data).then(response => {
+          this.$message({
+            type: 'success',
+            message: '修改成功'
+          })
+        });
       },
       /** 新增按钮操作 */
       handleAdd() {
