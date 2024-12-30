@@ -127,14 +127,7 @@
           </el-form-item>
           <el-form-item label="品牌logo地址" prop="logo">
             <!-- <el-input v-model="form.logo" type="textarea" placeholder="请输入内容" /> -->
-            <el-upload :action="upload.url + '?updateSupport=' + upload.updateSupport" :on-remove="handleRemove" 
-              :on-success="handleUploadSuccess" :on-preview="handlePreview" :multiple="false" :file-list="fileList">
-              <el-button size="small" type="primary">点击上传</el-button>
-              <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-            </el-upload>
-            <el-dialog :visible.sync="dialogVisible">
-              <img width="100%" :src="fileList[0].url" alt="">
-            </el-dialog>
+            <single-upload v-model="form.logo"></single-upload>
           </el-form-item>
           <el-form-item label="介绍" prop="descript">
             <el-input v-model="form.descript" type="textarea" placeholder="请输入内容" />
@@ -159,35 +152,10 @@
   
   <script>
   import { listBrand, getBrand, delBrand, addBrand, updateBrand } from "@/api/system/brand";
-  import { getToken } from "@/utils/auth";
-  
+  import singleUpload from '../../../components/FileUpload/singleUpload.vue';
   export default {
+  components: { singleUpload },
     name: "Brand",
-    computed: {
-      imageUrl() {
-        return this.value;
-      },
-      imageName() {
-        if (this.value != null && this.value !== '') {
-          return this.value.substr(this.value.lastIndexOf("/") + 1);
-        } else {
-          return null;
-        }
-      },
-      fileList() {
-        return [{
-          name: this.imageName,
-          url: this.imageUrl
-        }]
-      },
-      showFileList: {
-        get: function () {
-          return this.value !== null && this.value !== ''&& this.value!==undefined;
-        },
-        set: function (newValue) {
-        }
-      }
-    },
     data() {
       return {
         // 遮罩层
@@ -220,26 +188,18 @@
           sort: null
         },
         // 表单参数
-        form: {},
+        form: {
+          brandId: 0,
+          name: "",
+          logo: "",
+          descript: "",
+          showStatus: 1,
+          firstLetter: "",
+          sort: 0
+        },
         // 表单校验
         rules: {
         },
-        // 用户导入参数
-        upload: {
-            // 是否显示弹出层（用户导入）
-            open: false,
-            // 弹出层标题（用户导入）
-            title: "",
-            // 是否禁用上传
-            isUploading: false,
-            // 是否更新已经存在的用户数据
-            updateSupport: 0,
-            // 设置上传的请求头部
-            headers: { Authorization: "Bearer " + getToken() },
-            // 上传的地址
-            url: process.env.VUE_APP_BASE_API + "main/common/upload", // 上传文件服务器地址
-        },
-        dialogVisible: false
       };
     },
     created() {
@@ -351,21 +311,6 @@
           ...this.queryParams
         }, `brand_${new Date().getTime()}.xlsx`)
       },
-
-      handleRemove(file, fileList) {
-        this.emitInput('');
-      },
-      handlePreview(file) {
-        this.dialogVisible = true;
-      },
-      handleUploadSuccess(res, file) {
-        console.log("上传成功...")
-        this.showFileList = true;
-        this.fileList.pop();
-        this.fileList.push({name: file.name, url: this.dataObj.host + '/' + this.dataObj.key.replace("${filename}",file.name) });
-        this.emitInput(this.fileList[0].url);
-      }
-
     }
   };
   </script>

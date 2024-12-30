@@ -9,3 +9,11 @@
 # 2024/12/4 完成
 > product 目录整理
 
+# 2024/12/31 完成
+> 解决品牌管理新增品牌时，本地图片上传失败的问题</br>
+> 采用nginx设置静态资源访问路径</br>
+> location /api {
+alias    D:/java_code/gulimall/uploadPath;
+}
+
+
