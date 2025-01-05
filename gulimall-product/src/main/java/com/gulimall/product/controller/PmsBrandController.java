@@ -1,9 +1,15 @@
 package com.gulimall.product.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
+import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -71,9 +77,19 @@ public class PmsBrandController extends BaseController
      */
     @Log(title = "品牌", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody PmsBrand pmsBrand)
+    public AjaxResult add(@Valid @RequestBody PmsBrand pmsBrand, BindingResult result)
     {
-        return toAjax(pmsBrandService.insertPmsBrand(pmsBrand));
+        if(result.hasErrors()){
+            Map<String,String> map = new HashMap<>();
+            result.getFieldErrors().forEach((item) -> {
+                String message = item.getDefaultMessage();
+                String filed = item.getField();
+                map.put(filed,message);
+            });
+            return AjaxResult.error("提交数据不合法").put("data",map);
+        } else {
+            return toAjax(pmsBrandService.insertPmsBrand(pmsBrand));
+        }
     }
 
     /**

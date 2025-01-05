@@ -9,7 +9,7 @@
             @keyup.enter.native="handleQuery"
           />
         </el-form-item>
-        <el-form-item label="检索首字母" prop="firstLetter">
+        <el-form-item label="检索首字母" prop="firstLetter" label-width="85px">
           <el-input
             v-model="queryParams.firstLetter"
             placeholder="请输入检索首字母"
@@ -81,7 +81,11 @@
         <el-table-column type="selection" width="55" align="center" />
         <el-table-column label="品牌id" align="center" prop="brandId" />
         <el-table-column label="品牌名" align="center" prop="name" />
-        <el-table-column label="品牌logo地址" align="center" prop="logo" />
+        <el-table-column label="品牌logo地址" align="center" prop="logo">
+          <template slot-scope="scope">
+            <img :src="scope.row.logo" style="width: 100px; height: 80px">
+          </template>
+        </el-table-column>
         <el-table-column label="介绍" align="center" prop="descript" />
         <el-table-column label="显示状态" align="center" prop="showStatus">
           <template slot-scope="scope">
@@ -133,13 +137,14 @@
             <el-input v-model="form.descript" type="textarea" placeholder="请输入内容" />
           </el-form-item>
           <el-form-item label="显示状态" prop="showStatus">
-            <el-switch v-model="form.showStatus" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+            <el-switch v-model="form.showStatus" active-color="#13ce66" inactive-color="#ff4949"
+            :active-value="1" :inactive-value="0"></el-switch>
           </el-form-item>
           <el-form-item label="检索首字母" prop="firstLetter">
             <el-input v-model="form.firstLetter" placeholder="请输入检索首字母" />
           </el-form-item>
           <el-form-item label="排序" prop="sort">
-            <el-input v-model="form.sort" placeholder="请输入排序" />
+            <el-input v-model.number="form.sort" placeholder="请输入排序" />
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -199,6 +204,34 @@
         },
         // 表单校验
         rules: {
+          name : [{ required: true, message: "品牌名不能为空", trigger: "blur" }],
+          logo : [{ required: true, message: "品牌logo地址不能为空", trigger: "blur" }],
+          descript : [{required: true, message: "介绍不能为空", trigger: "blur" }],
+          showStatus: [{ required: true, message: "显示状态[0-不显示；1-显示]不能为空", trigger: "blur"}],
+          firstLetter: [{
+            validator: (rule, value, callback) => {
+              if (value === "" || value == null) {
+                callback(new Error("首字母必须填写"));
+              } else if (!/^[a-zA-Z]$/.test(value)) {
+                callback(new Error("首字母必须a-z或者A-Z之间"));
+              } else {
+                callback();
+              }
+            },
+            trigger: "blur"
+        }],
+        sort: [{
+            validator: (rule, value, callback) => {
+              if (value === "" || value == null) {
+                callback(new Error("排序字段必须填写"));
+              } else if (!Number.isInteger(value) || value<0) {
+                callback(new Error("排序必须是一个大于等于0的整数"));
+              } else {
+                callback();
+              }
+            },
+            trigger: "blur"
+        }]
         },
       };
     },

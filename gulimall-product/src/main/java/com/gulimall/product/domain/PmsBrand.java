@@ -4,6 +4,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.gulimall.common.annotation.Excel;
 import com.gulimall.common.core.domain.BaseEntity;
+import org.hibernate.validator.constraints.URL;
+
+import javax.validation.constraints.*;
 
 /**
  * 品牌对象 pms_brand
@@ -20,10 +23,13 @@ public class PmsBrand extends BaseEntity
 
     /** 品牌名 */
     @Excel(name = "品牌名")
+    @NotBlank(message = "品牌名不能为空")
     private String name;
 
     /** 品牌logo地址 */
     @Excel(name = "品牌logo地址")
+    @NotEmpty
+    @URL(message = "logo必须是一个合法的URL")
     private String logo;
 
     /** 介绍 */
@@ -36,10 +42,14 @@ public class PmsBrand extends BaseEntity
 
     /** 检索首字母 */
     @Excel(name = "检索首字母")
+    @NotEmpty
+    @Pattern(regexp = "^[a-zA-Z]$",message = "首字母必须是一个字母")
     private String firstLetter;
 
     /** 排序 */
     @Excel(name = "排序")
+    @NotNull
+    @Min(value = 0,message = "排序必须是一个非负整数")
     private Long sort;
 
     public void setBrandId(Long brandId) 
