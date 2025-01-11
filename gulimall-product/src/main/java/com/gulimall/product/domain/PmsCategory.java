@@ -1,5 +1,6 @@
 package com.gulimall.product.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.gulimall.common.annotation.Excel;
@@ -52,6 +53,7 @@ public class PmsCategory extends BaseEntity
     @Excel(name = "商品数量")
     private Long productCount;
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<PmsCategory> Childrens;
 
     public void setCatId(Long catId) 
@@ -156,6 +158,10 @@ public class PmsCategory extends BaseEntity
     }
 
     public void setChildrens(List<PmsCategory> childrens) {
-        Childrens = childrens;
+        if (childrens.isEmpty()) {
+            Childrens = null;
+        } else {
+            Childrens = childrens;
+        }
     }
 }

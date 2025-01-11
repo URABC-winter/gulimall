@@ -83,8 +83,8 @@
             <el-form-item label="组图标" prop="icon">
               <el-input v-model="form.icon" placeholder="请输入组图标" />
             </el-form-item>
-            <el-form-item label="所属分类id" prop="catelogId">
-              <el-input v-model="form.catelogId" placeholder="请输入所属分类id" />
+            <el-form-item label="所属分类id" prop="catelogId" label-width="85px">
+              <el-cascader v-model="form.catelogPath" :options="categories" :props="catrgoryProps"></el-cascader>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -99,6 +99,7 @@
 
 <script>
 import { listGroup, getGroup, delGroup, addGroup, updateGroup } from "@/api/system/group";
+import {getCategory} from "@/api/system/product"
 import category from '../../../components/Product/category.vue'
 export default {
   components: { category },
@@ -133,26 +134,45 @@ export default {
         catelogId: null
       },
       // 表单参数
-      form: {},
+      form: {
+        attrGroupId: null,
+        sort: null,
+        descript: null,
+        icon: null,
+        catelogPath: [],
+        catelogId: 0
+      },
       // 表单校验
       rules: {
         attrGroupName :[{ required: true, message: "组名不能为空", trigger: "blur" }],
         sort :[{ required: true, message: "排序不能为空", trigger: "blur" }],
         descript :[{ required: true, message: "描述不能为空", trigger: "blur" }],
         icon :[{ required: true, message: "图标不能为空", trigger: "blur" }],
-        catelogId :[{}]
+        catelogId :[{ required: true, message: "所属分类id不能为空", trigger: "blur" }]
       },
+      catrgoryProps : {
+        value: 'catId',
+        label: 'name',
+        children: 'childrens'
+      },
+      categories: [],
       catelogId: 0
     };
   },
   created() {
     this.getList();
+    this.getCategories();
   },
   methods: {
+    getCategories() {
+        this.loading = true;
+        getCategory(this.queryParams).then(response => {
+            this.categories = response.data;
+        });
+    },
     nodeClick(data, node, component) {
       // console.log("父data,node,component = ",data, node, component)
       if (node.level == 3) {
-        console.log("data.catId = ", data.catId)
         this.queryParams.catelogId = data.catId
         this.handleQuery()
       }
@@ -229,6 +249,7 @@ export default {
               this.getList();
             });
           } else {
+            this.form.catelogId = this.form.catelogPath[this.form.catelogPath.length - 1]
             addGroup(this.form).then(response => {
               this.$modal.msgSuccess("新增成功");
               this.open = false;

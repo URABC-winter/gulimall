@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import {category} from "@/api/system/product"
+import {getCategory} from "@/api/system/product"
 export default {
     data() {
         return {
@@ -21,7 +21,8 @@ export default {
     methods: {
         getMenu() {
             this.loading = true;
-            category(this.queryParams).then(response => {
+            getCategory(this.queryParams).then(response => {
+                console.log("response = ", response.data)
                 this.menus = response.data;
             });
         },

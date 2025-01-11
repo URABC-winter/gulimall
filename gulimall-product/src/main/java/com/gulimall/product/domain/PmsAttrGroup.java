@@ -5,6 +5,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.gulimall.common.annotation.Excel;
 import com.gulimall.common.core.domain.BaseEntity;
 
+import java.util.List;
+
 /**
  * 属性分组对象 pms_attr_group
  * 
@@ -37,6 +39,8 @@ public class PmsAttrGroup extends BaseEntity
     /** 所属分类id */
     @Excel(name = "所属分类id")
     private Long catelogId;
+
+    private List<PmsAttrGroup> catelogPath;
 
     public void setAttrGroupId(Long attrGroupId) 
     {
