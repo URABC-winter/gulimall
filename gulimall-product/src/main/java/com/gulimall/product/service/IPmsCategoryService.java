@@ -62,4 +62,6 @@ public interface IPmsCategoryService
     public List<PmsCategory> selectPmsCategoryListTree(PmsCategory pmsCategory);
 
     int updatePmsCategoryList(List<PmsCategory> pmsCategory);
+
+    public Long[] getCatlogPath(Long catId);
 }

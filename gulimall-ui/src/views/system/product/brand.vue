@@ -79,8 +79,8 @@
   
       <el-table v-loading="loading" :data="brandList" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center" />
-        <el-table-column label="品牌id" align="center" prop="brandId" />
-        <el-table-column label="品牌名" align="center" prop="name" />
+        <el-table-column label="品牌id" width="80px" align="center" prop="brandId" />
+        <el-table-column label="品牌名" width="80px" align="center" prop="name" />
         <el-table-column label="品牌logo地址" align="center" prop="logo">
           <template slot-scope="scope">
             <img :src="scope.row.logo" style="width: 100px; height: 80px">
@@ -97,20 +97,9 @@
         <el-table-column label="排序" align="center" prop="sort" />
         <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
           <template slot-scope="scope">
-            <el-button
-              size="mini"
-              type="text"
-              icon="el-icon-edit"
-              @click="handleUpdate(scope.row)"
-              v-hasPermi="['system:brand:edit']"
-            >修改</el-button>
-            <el-button
-              size="mini"
-              type="text"
-              icon="el-icon-delete"
-              @click="handleDelete(scope.row)"
-              v-hasPermi="['system:brand:remove']"
-            >删除</el-button>
+            <el-button size="mini" type="text" icon="el-icon-view" @click="handleRelation(scope.row)">关联分类</el-button>
+            <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:brand:edit']">修改</el-button>
+            <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:brand:remove']">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -152,14 +141,44 @@
           <el-button @click="cancel">取 消</el-button>
         </div>
       </el-dialog>
+
+      <el-dialog title="关联分类" :visible.sync="catelogDialogVisible" width="30%">
+        <el-popover placement="right-end" v-model="popCatelogSelectVisible">
+          <category-cascader :catelogPath.sync="catelogPath"></category-cascader>
+          <div style="text-align: right; margin: 0">
+            <el-button size="mini" type="text" @click="popCatelogSelectVisible = false">取消</el-button>
+            <el-button type="primary" size="mini" @click="addCatelogSelect">确定</el-button>
+          </div>
+          <el-button slot="reference">新增关联</el-button>
+        </el-popover>
+        <el-table :data="cateRelationTableData" style="width: 100%">
+          <el-table-column prop="id" label="#"></el-table-column>
+          <el-table-column prop="brandName" label="品牌名"></el-table-column>
+          <el-table-column prop="catelogName" label="分类名"></el-table-column>
+          <el-table-column fixed="right" header-align="center" align="center" label="操作">
+            <template slot-scope="scope">
+              <el-button
+                type="text"
+                size="small"
+                @click="deleteCateRelationHandle(scope.row.id, scope.row.brandId)"
+              >移除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="cateRelationDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="cateRelationDialogVisible = false">确 定</el-button>
+        </span>
+        </el-dialog>
     </div>
   </template>
   
   <script>
   import { listBrand, getBrand, delBrand, addBrand, updateBrand } from "@/api/system/brand";
   import singleUpload from '../../../components/FileUpload/singleUpload.vue';
+  import CategoryCascader from '../../../components/Product/category-cascader.vue';
   export default {
-  components: { singleUpload },
+  components: { singleUpload, CategoryCascader },
     name: "Brand",
     data() {
       return {
@@ -219,20 +238,24 @@
               }
             },
             trigger: "blur"
-        }],
-        sort: [{
-            validator: (rule, value, callback) => {
-              if (value === "" || value == null) {
-                callback(new Error("排序字段必须填写"));
-              } else if (!Number.isInteger(value) || value<0) {
-                callback(new Error("排序必须是一个大于等于0的整数"));
-              } else {
-                callback();
-              }
-            },
-            trigger: "blur"
-        }]
+          }],
+          sort: [{
+              validator: (rule, value, callback) => {
+                if (value === "" || value == null) {
+                  callback(new Error("排序字段必须填写"));
+                } else if (!Number.isInteger(value) || value<0) {
+                  callback(new Error("排序必须是一个大于等于0的整数"));
+                } else {
+                  callback();
+                }
+              },
+              trigger: "blur"
+          }]
         },
+        catelogPath: [],
+        cateRelationTableData: [],
+        catelogDialogVisible: false,
+        popCatelogSelectVisible: false
       };
     },
     created() {
@@ -298,6 +321,10 @@
         this.open = true;
         this.title = "添加品牌";
       },
+      /** 关联分类操作 */
+      handleRelation(row) {
+        this.catelogDialogVisible = true;
+      },
       /** 修改按钮操作 */
       handleUpdate(row) {
         this.reset();
@@ -344,6 +371,10 @@
           ...this.queryParams
         }, `brand_${new Date().getTime()}.xlsx`)
       },
+
+      addCatelogSelect() {
+        
+      }
     }
   };
   </script>

@@ -115,6 +115,14 @@ public class PmsCategoryServiceImpl implements IPmsCategoryService
         return pmsCategoryMapper.updatePmsCategoryList(pmsCategory);
     }
 
+    @Override
+    public Long[] getCatlogPath(Long catId) {
+        PmsCategory pmsCategory3 = pmsCategoryMapper.selectPmsCategoryByCatId(catId);
+        PmsCategory pmsCategory2 = pmsCategoryMapper.selectPmsCategoryByCatId(pmsCategory3.getParentCid());
+        PmsCategory pmsCategory1 = pmsCategoryMapper.selectPmsCategoryByCatId(pmsCategory2.getParentCid());
+        return new Long[]{pmsCategory1.getCatId(),pmsCategory2.getCatId(),pmsCategory3.getCatId()};
+    }
+
     private List<PmsCategory> getChildrens(PmsCategory root, List<PmsCategory> list) {
         List<PmsCategory> children = list.stream().filter(
                 menu -> menu.getParentCid().equals(root.getCatId())

@@ -243,6 +243,7 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.attrGroupId != null) {
+            this.form.catelogId = this.form.catelogPath[this.form.catelogPath.length - 1]
             updateGroup(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
               this.open = false;

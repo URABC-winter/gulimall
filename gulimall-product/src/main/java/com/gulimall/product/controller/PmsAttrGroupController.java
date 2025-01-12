@@ -2,6 +2,8 @@ package com.gulimall.product.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.gulimall.product.service.IPmsCategoryService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +36,9 @@ public class PmsAttrGroupController extends BaseController
     @Autowired
     private IPmsAttrGroupService pmsAttrGroupService;
 
+    @Autowired
+    private IPmsCategoryService pmsCategoryService;
+
     /**
      * 查询属性分组列表
      */
@@ -63,7 +68,12 @@ public class PmsAttrGroupController extends BaseController
     @GetMapping(value = "/{attrGroupId}")
     public AjaxResult getInfo(@PathVariable("attrGroupId") Long attrGroupId)
     {
-        return success(pmsAttrGroupService.selectPmsAttrGroupByAttrGroupId(attrGroupId));
+        PmsAttrGroup pmsAttrGroup = pmsAttrGroupService.selectPmsAttrGroupByAttrGroupId(attrGroupId);
+        Long catelogId = pmsAttrGroup.getCatelogId();
+        Long[] catlogPath = pmsCategoryService.getCatlogPath(catelogId);
+        pmsAttrGroup.setCatelogPath(catlogPath);
+
+        return success(pmsAttrGroup);
     }
 
     /**

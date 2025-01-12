@@ -40,7 +40,7 @@ public class PmsAttrGroup extends BaseEntity
     @Excel(name = "所属分类id")
     private Long catelogId;
 
-    private List<PmsAttrGroup> catelogPath;
+    private Long[] catelogPath;
 
     public void setAttrGroupId(Long attrGroupId) 
     {
@@ -97,6 +97,14 @@ public class PmsAttrGroup extends BaseEntity
         return catelogId;
     }
 
+    public Long[] getCatelogPath() {
+        return catelogPath;
+    }
+
+    public void setCatelogPath(Long[] catelogPath) {
+        this.catelogPath = catelogPath;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -106,6 +114,7 @@ public class PmsAttrGroup extends BaseEntity
             .append("descript", getDescript())
             .append("icon", getIcon())
             .append("catelogId", getCatelogId())
+            .append("catelogPath", getCatelogPath())
             .toString();
     }
 }

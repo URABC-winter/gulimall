@@ -22,7 +22,6 @@ export default {
         getMenu() {
             this.loading = true;
             getCategory(this.queryParams).then(response => {
-                console.log("response = ", response.data)
                 this.menus = response.data;
             });
         },
